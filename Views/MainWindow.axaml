@@ -1,0 +1,64 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:CryptoWidget.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="250" d:DesignHeight="120"
+        x:Class="CryptoWidget.MainWindow"
+        x:DataType="vm:MainViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="CryptoWidget"
+        Width="250" Height="120"
+        CanResize="False"
+        WindowStartupLocation="CenterScreen"
+        Topmost="True"
+        ExtendClientAreaToDecorationsHint="True"
+        ExtendClientAreaChromeHints="NoChrome"
+        ShowInTaskbar="False"
+        Opacity="{Binding Settings.OpacityLevel}"
+        >
+
+    <Design.DataContext>
+        <!-- This only sets the DataContext for the previewer in an IDE,
+             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+        <vm:MainViewModel/>
+    </Design.DataContext>
+
+    <Border Margin="10">
+      <Grid>
+        <Grid.RowDefinitions>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- 齒輪按鈕 -->
+        <Button Grid.Row="0"
+          HorizontalAlignment="Right"
+          Margin="0,0,24,0"
+          Padding="4,5,0,0"
+          Width="24" Height="24"
+          Background="Transparent" BorderThickness="0"
+          FontFamily="Segoe MDL2 Assets"
+          FontSize="14"
+          Content="&#xE115;"
+          Command="{Binding OpenSettingsCommand}"/>
+
+        <Button Grid.Row="0"
+          HorizontalAlignment="Right"
+          Width="24" Height="24"
+          Padding="4"
+          Background="Transparent" BorderThickness="0"
+          FontFamily="Segoe MDL2 Assets"
+          FontSize="16"
+          Content="&#xE10A;"
+          Click="CloseButton_Click"/>
+
+        <!-- 幣價 -->
+        <StackPanel Grid.Row="1" Spacing="6">
+          <TextBlock Text="{Binding BtcPrice}" Foreground="White" FontSize="18"/>
+          <TextBlock Text="{Binding EthPrice}" Foreground="White" FontSize="18"/>
+        </StackPanel>
+      </Grid>
+    </Border>
+
+</Window>
