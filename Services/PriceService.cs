@@ -9,15 +9,14 @@ namespace CryptoWidget.Services
     {
         private static readonly Binance _exchange = new Binance();
 
-        public static async Task<Dictionary<string, double>> GetCryptoPricesAsync()
+        public static async Task<Dictionary<string, double>> GetCryptoPricesAsync(List<string> symbols)
         {
-            //await _exchange.loadMarkets();
-
-            var symbols = new List<string> { "BTC/USDT", "ETH/USDT" };
+            var prices = new Dictionary<string, double>();
+            if (symbols == null || symbols.Count == 0)
+                return prices;
             var ticker = await _exchange.FetchTickers(symbols);
 
-
-            var prices = ticker.tickers.Values.Select(v => new { v.symbol, v.last }).ToDictionary(v => v.symbol!, v => v.last ?? 0);
+            prices = ticker.tickers.Values.Select(v => new { v.symbol, v.last }).ToDictionary(v => v.symbol!, v => v.last ?? 0);
 
             return prices;
         }

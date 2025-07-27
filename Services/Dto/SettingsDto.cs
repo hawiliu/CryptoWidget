@@ -10,6 +10,8 @@ namespace CryptoWidget.Services.Dto
     {
         public double OpacityLevel { get; set; }
 
+        public bool KeepOnTop { get; set; }
+
         public List<string> CryptoList { get; set; }
     }
 }

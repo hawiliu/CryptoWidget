@@ -55,8 +55,7 @@
 
         <!-- 幣價 -->
         <StackPanel Grid.Row="1" Spacing="6">
-          <TextBlock Text="{Binding BtcPrice}" Foreground="White" FontSize="18"/>
-          <TextBlock Text="{Binding EthPrice}" Foreground="White" FontSize="18"/>
+          <TextBlock Text="{Binding PriceLines}" Foreground="White" FontSize="18"/>
         </StackPanel>
       </Grid>
     </Border>

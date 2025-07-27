@@ -1,5 +1,6 @@
 using Avalonia.Controls;
 using CryptoWidget.ViewModels;
+using System.ComponentModel;
 
 namespace CryptoWidget
 {
@@ -15,10 +16,32 @@ namespace CryptoWidget
                 if (e.GetCurrentPoint(this).Properties.IsLeftButtonPressed)
                     BeginMoveDrag(e);
             };
+
+            // ç›£è½ KeepOnTop å±¬æ€§è®ŠåŒ–
+            if (mainViewModel.Settings != null)
+            {
+                mainViewModel.Settings.PropertyChanged += OnSettingsPropertyChanged;
+                // åˆå§‹åŒ– Topmost ç‹€æ…‹
+                this.Topmost = mainViewModel.Settings.KeepOnTop;
+            }
         }
 
-        // Ãö³¬«ö¶s
+        private void OnSettingsPropertyChanged(object? sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(Services.SettingsService.KeepOnTop) && sender is Services.SettingsService settings)
+            {
+                this.Topmost = settings.KeepOnTop;
+            }
+        }
+
         private void CloseButton_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
-            => Close();
+        {
+            if (DataContext is MainViewModel vm && vm._settingWindow != null)
+            { 
+                vm._settingWindow.Close();
+            }
+
+            Close();
+        }
     }
 }

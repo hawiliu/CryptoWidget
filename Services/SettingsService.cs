@@ -1,9 +1,12 @@
 ﻿using AutoMapper;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using CryptoWidget.Services.Dto;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
+using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 
@@ -25,37 +28,55 @@ namespace CryptoWidget.Services
         private double opacityLevel = 0.8;
 
         [ObservableProperty]
-        private List<string> cryptoList = new List<string>();
+        private bool keepOnTop = false;
+
+        [ObservableProperty]
+        private ObservableCollection<string> cryptoList = new ObservableCollection<string>() { "BTC/USDT" };
+
+        [ObservableProperty] 
+        private string newCryptoSymbol = string.Empty;
 
         public async Task LoadAsync()
         {
-            if (!File.Exists(_configPath)) return;
+            if (!File.Exists(_configPath))
+                return;
 
-            try
-            {
-                var json = await File.ReadAllTextAsync(_configPath);
-                var dto = JsonSerializer.Deserialize<SettingsDto>(json);
+            var dto = JsonSerializer.Deserialize<SettingsDto>(
+                await File.ReadAllTextAsync(_configPath));
 
-                if (dto is not null)
-                    OpacityLevel = dto.OpacityLevel;
-            }
-            catch { /* 讀檔失敗時使用預設值 */ }
+            if (dto != null)
+                _mapper.Map(dto, this);
         }
 
-        private async Task SaveAsync()
+        public async Task SaveAsync()
         {
-            try
-            {
-                Directory.CreateDirectory(Path.GetDirectoryName(_configPath)!);
-                var dto = new SettingsDto { OpacityLevel = OpacityLevel };
-                var json = JsonSerializer.Serialize(dto, new JsonSerializerOptions { WriteIndented = true });
-                await File.WriteAllTextAsync(_configPath, json);
-            }
-            catch { /* 寫檔失敗可略過或另行記錄 */ }
+            Directory.CreateDirectory(Path.GetDirectoryName(_configPath)!);
+
+            var dto = _mapper.Map<SettingsDto>(this);
+
+            await File.WriteAllTextAsync(
+                _configPath,
+                JsonSerializer.Serialize(dto, new JsonSerializerOptions { WriteIndented = true }));
         }
 
-        partial void OnOpacityLevelChanged(double oldValue, double newValue) => _ = SaveAsync();
+        [RelayCommand]                // AddCryptoCommand
+        private void AddCrypto()
+        {
+            var sym = NewCryptoSymbol.Trim().ToUpper();
+            if (string.IsNullOrWhiteSpace(sym)) return;
+            if (!sym.Contains('/')) sym += "/USDT";       // 允許輸入 BTC 自動補 /USDT
+            if (!CryptoList.Contains(sym))
+                CryptoList.Add(sym);
+            NewCryptoSymbol = string.Empty;               // 清空輸入框
+        }
 
-        
+        [RelayCommand]                // RemoveCryptoCommand (CommandParameter 傳入要刪的字串)
+        private void RemoveCrypto(string symbol)
+        {
+            if (symbol is not null) CryptoList.Remove(symbol);
+        }
+
+        // 移除透明度改變時的自動保存，改為手動保存
+        // partial void OnOpacityLevelChanged(double oldValue, double newValue) => _ = SaveAsync();
     }
 }
