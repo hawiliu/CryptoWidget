@@ -11,5 +11,30 @@
   
     <Application.Styles>
         <FluentTheme />
+        <Style Selector="Window">
+          <!-- ★ 讓 Avalonia 視窗內也使用同圖示 -->
+          <Setter Property="Icon" Value="/Assets/cryptowidget-logo.ico"/>
+        </Style>
     </Application.Styles>
+
+    <!-- TrayIcon 設定 -->
+    <TrayIcon.Icons>
+        <TrayIcons>
+            <!-- icon 參考 https://icon-icons.com/icon/usd-crypto-cryptocurrency-cryptocurrencies-cash-money-bank-payment/95103 -->
+            <TrayIcon Icon="/Assets/cryptowidget-logo.ico" 
+                      ToolTipText="CryptoWidget - 加密貨幣價格監控">
+                <TrayIcon.Menu>
+                    <NativeMenu>
+                        <NativeMenuItem Header="顯示主視窗" Click="ShowMainWindow_Click"/>
+                        <NativeMenuItemSeparator />
+                        <NativeMenuItem Header="設定" Click="OpenSettings_Click"/>
+                        <NativeMenuItemSeparator />
+                        <NativeMenuItem Header="關於" Click="OpenAbout_Click"/>
+                        <NativeMenuItemSeparator />
+                        <NativeMenuItem Header="退出" Click="Exit_Click"/>
+                    </NativeMenu>
+                </TrayIcon.Menu>
+            </TrayIcon>
+        </TrayIcons>
+    </TrayIcon.Icons>
 </Application>

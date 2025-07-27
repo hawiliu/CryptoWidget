@@ -13,6 +13,10 @@ namespace CryptoWidget.ViewModels
 
         public SettingsWindow? _settingWindow;
 
+        public AboutWindow? _aboutWindow;
+
+        public MainViewModel() { }
+
         public MainViewModel(SettingsService settingsService)
         {
             _settingsService = settingsService;
@@ -37,11 +41,35 @@ namespace CryptoWidget.ViewModels
                 if (prices.Count == 0)
                     PriceLines = "Empty";
                 else
-                    PriceLines = string.Join('\n', prices.Select(p => $"{p.Key}: {p.Value:F2} USD"));
+                    PriceLines = string.Join('\n', prices.Select(p => $"{p.Key}: {FormatPrice(p.Value)}"));
             }
             catch
             {
                 PriceLines = "Error";
+            }
+        }
+
+        private string FormatPrice(double price)
+        {
+            if (price >= 1.0)
+            {
+                return price.ToString("F2");
+            }
+            else if (price >= 0.01)
+            {
+                return price.ToString("F4");
+            }
+            else if (price >= 0.0001)
+            {
+                return price.ToString("F6");
+            }
+            else if (price >= 0.000001)
+            {
+                return price.ToString("F8");
+            }
+            else
+            {
+                return price.ToString("F10");
             }
         }
 
@@ -53,6 +81,16 @@ namespace CryptoWidget.ViewModels
                 WindowStartupLocation = Avalonia.Controls.WindowStartupLocation.CenterOwner
             };
             _settingWindow.Show();
+        }
+
+        [RelayCommand]
+        private void OpenAbout()
+        {
+            _aboutWindow = new AboutWindow(_settingsService)
+            {
+                WindowStartupLocation = Avalonia.Controls.WindowStartupLocation.CenterOwner
+            };
+            _aboutWindow.Show();
         }
     }
 }

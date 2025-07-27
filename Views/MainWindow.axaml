@@ -3,13 +3,15 @@
         xmlns:vm="using:CryptoWidget.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="250" d:DesignHeight="120"
+        mc:Ignorable="d" d:DesignWidth="250" d:DesignHeight="100"
         x:Class="CryptoWidget.MainWindow"
         x:DataType="vm:MainViewModel"
-        Icon="/Assets/avalonia-logo.ico"
+        Icon="/Assets/cryptowidget-logo.ico"
         Title="CryptoWidget"
-        Width="250" Height="120"
-        CanResize="False"
+        Width="250" Height="100"
+        MinWidth="250" MaxWidth="250"
+        MinHeight="100"
+        CanResize="True"
         WindowStartupLocation="CenterScreen"
         Topmost="True"
         ExtendClientAreaToDecorationsHint="True"
@@ -31,25 +33,46 @@
           <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!-- 齒輪按鈕 -->
+        <!-- 版本號按鈕 -->
         <Button Grid.Row="0"
           HorizontalAlignment="Right"
-          Margin="0,0,24,0"
-          Padding="4,5,0,0"
+          VerticalAlignment="Center"
+          Margin="0,0,48,0"
           Width="24" Height="24"
+          Padding="0"
           Background="Transparent" BorderThickness="0"
           FontFamily="Segoe MDL2 Assets"
           FontSize="14"
+          HorizontalContentAlignment="Center"
+          VerticalContentAlignment="Center"
+          Content="&#xE946;"
+          Command="{Binding OpenAboutCommand}"/>
+
+        <!-- 齒輪按鈕 -->
+        <Button Grid.Row="0"
+          HorizontalAlignment="Right"
+          VerticalAlignment="Center"
+          Margin="0,0,24,0"
+          Width="24" Height="24"
+          Padding="0"
+          Background="Transparent" BorderThickness="0"
+          FontFamily="Segoe MDL2 Assets"
+          FontSize="14"
+          HorizontalContentAlignment="Center"
+          VerticalContentAlignment="Center"
           Content="&#xE115;"
           Command="{Binding OpenSettingsCommand}"/>
 
         <Button Grid.Row="0"
           HorizontalAlignment="Right"
+          VerticalAlignment="Center"
           Width="24" Height="24"
-          Padding="4"
+          Padding="0"
           Background="Transparent" BorderThickness="0"
           FontFamily="Segoe MDL2 Assets"
           FontSize="16"
+          HorizontalContentAlignment="Center"
+          VerticalContentAlignment="Center"
           Content="&#xE10A;"
           Click="CloseButton_Click"/>
 

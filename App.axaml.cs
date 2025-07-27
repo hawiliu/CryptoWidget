@@ -1,4 +1,5 @@
 using Avalonia;
+using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Data.Core;
 using Avalonia.Data.Core.Plugins;
@@ -43,6 +44,42 @@ namespace CryptoWidget
             foreach (var plugin in dataValidationPluginsToRemove)
             {
                 BindingPlugins.DataValidators.Remove(plugin);
+            }
+        }
+
+        // TrayIcon 事件處理
+        private void ShowMainWindow_Click(object? sender, EventArgs e)
+        {
+            if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+            {
+                desktop.MainWindow?.Show();
+                desktop.MainWindow?.Activate();
+            }
+        }
+
+        private void OpenSettings_Click(object? sender, EventArgs e)
+        {
+            if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+            {
+                var mainViewModel = desktop.MainWindow?.DataContext as MainViewModel;
+                mainViewModel?.OpenSettingsCommand.Execute(null);
+            }
+        }
+
+        private void OpenAbout_Click(object? sender, EventArgs e)
+        {
+            if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+            {
+                var mainViewModel = desktop.MainWindow?.DataContext as MainViewModel;
+                mainViewModel?.OpenAboutCommand.Execute(null);
+            }
+        }
+
+        private void Exit_Click(object? sender, EventArgs e)
+        {
+            if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+            {
+                desktop.Shutdown();
             }
         }
     }

@@ -6,9 +6,11 @@ namespace CryptoWidget
 {
     public partial class SettingsWindow : Window
     {
-        public SettingsWindow() { 
+        public SettingsWindow()
+        {
             InitializeComponent();
         }
+
         public SettingsWindow(SettingsService settings)
         {
             InitializeComponent();

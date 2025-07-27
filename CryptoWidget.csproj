@@ -6,6 +6,20 @@
     <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+    
+    <!-- 版本資訊 -->
+    <Version>1.0.0</Version>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
+    <Company>Hawiliu</Company>
+    <Product>CryptoWidget</Product>
+    <Description>加密貨幣價格監控小工具</Description>
+    <Copyright>Copyright © 2025 Hawiliu All Rights Reserved</Copyright>
+    <Authors>Hawiliu</Authors>
+    <ApplicationIcon>Assets\cryptowidget-logo.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DebugType>none</DebugType>
   </PropertyGroup>
 
   <ItemGroup>
@@ -26,5 +40,13 @@
     <PackageReference Include="ccxt" Version="4.4.96" />
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.7" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AvaloniaResource Remove="Assets\cryptocurrency.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Assets\cryptowidget-logo.ico" />
   </ItemGroup>
 </Project>

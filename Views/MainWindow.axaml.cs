@@ -6,6 +6,11 @@ namespace CryptoWidget
 {
     public partial class MainWindow : Window
     {
+        public MainWindow()
+        { 
+            InitializeComponent();
+        }
+
         public MainWindow(MainViewModel mainViewModel)
         {
             InitializeComponent();
@@ -36,12 +41,17 @@ namespace CryptoWidget
 
         private void CloseButton_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
         {
-            if (DataContext is MainViewModel vm && vm._settingWindow != null)
+            if (DataContext is MainViewModel vm)
             { 
-                vm._settingWindow.Close();
+                if(vm._settingWindow != null)
+                    vm._settingWindow.Close();
+
+                if(vm._aboutWindow != null)
+                    vm._aboutWindow.Close();
             }
 
-            Close();
+            // 最小化到系統匣而不是關閉
+            Hide();
         }
     }
 }
