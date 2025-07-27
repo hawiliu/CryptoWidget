@@ -8,7 +8,18 @@ namespace CryptoWidget.ViewModels
 {
     public partial class MainViewModel : ViewModelBase
     {
-        public SettingsService Settings => SettingsService.Instance;
+        private readonly SettingsService _settingsService;
+
+        public MainViewModel(SettingsService settingsService)
+        {
+            _settingsService = settingsService;
+
+            UpdatePrices();
+            _timer.Elapsed += async (s, e) => await UpdatePrices();
+            _timer.Start();
+        }
+
+        public SettingsService Settings { get { return _settingsService; } }   // 供 XAML 綁定
 
         [ObservableProperty]
         private string btcPrice = "BTC: Loading...";
@@ -18,12 +29,7 @@ namespace CryptoWidget.ViewModels
 
         private readonly Timer _timer = new Timer(5000); // 每 5 秒更新
 
-        public MainViewModel()
-        {
-            UpdatePrices();
-            _timer.Elapsed += async (s, e) => await UpdatePrices();
-            _timer.Start();
-        }
+
 
         private async Task UpdatePrices()
         {
@@ -43,9 +49,8 @@ namespace CryptoWidget.ViewModels
         [RelayCommand]
         private void OpenSettings()
         {
-            var win = new SettingsWindow
+            var win = new SettingsWindow(_settingsService)
             {
-                DataContext = SettingsService.Instance,
                 WindowStartupLocation = Avalonia.Controls.WindowStartupLocation.CenterOwner
             };
             win.Show();

@@ -4,12 +4,16 @@ using Avalonia.Data.Core;
 using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
 using CryptoWidget.ViewModels;
+using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Linq;
 
 namespace CryptoWidget
 {
     public partial class App : Application
     {
+        public static IServiceProvider? Services { get; set; }
+
         public override void Initialize()
         {
             AvaloniaXamlLoader.Load(this);
@@ -22,10 +26,8 @@ namespace CryptoWidget
                 // Avoid duplicate validations from both Avalonia and the CommunityToolkit. 
                 // More info: https://docs.avaloniaui.net/docs/guides/development-guides/data-validation#manage-validationplugins
                 DisableAvaloniaDataAnnotationValidation();
-                desktop.MainWindow = new MainWindow
-                {
-                    DataContext = new MainViewModel(),
-                };
+
+                desktop.MainWindow = Services!.GetRequiredService<MainWindow>();
             }
 
             base.OnFrameworkInitializationCompleted();

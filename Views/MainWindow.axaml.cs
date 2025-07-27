@@ -1,12 +1,14 @@
 using Avalonia.Controls;
+using CryptoWidget.ViewModels;
 
 namespace CryptoWidget
 {
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        public MainWindow(MainViewModel mainViewModel)
         {
             InitializeComponent();
+            DataContext = mainViewModel;
 
             this.PointerPressed += (_, e) =>
             {

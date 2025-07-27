@@ -1,5 +1,11 @@
 ﻿using Avalonia;
+using CryptoWidget.Services;
+using CryptoWidget.Services.AutoMapper;
+using CryptoWidget.ViewModels;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using System;
+using System.Threading.Tasks;
 
 namespace CryptoWidget
 {
@@ -9,8 +15,41 @@ namespace CryptoWidget
         // SynchronizationContext-reliant code before AppMain is called: things aren't initialized
         // yet and stuff might break.
         [STAThread]
-        public static void Main(string[] args) => BuildAvaloniaApp()
-            .StartWithClassicDesktopLifetime(args);
+        public static async Task Main(string[] args)
+        {
+            // ① 建立 Generic Host
+            using var host = Host.CreateDefaultBuilder(args)
+                .ConfigureServices(services =>
+                {
+                    // AutoMapper：掃描所有 Profile
+                    services.AddAutoMapper(cfg =>
+                    {
+                        cfg.AddProfile<SettingsProfile>();
+                    });
+
+                    // 註冊 SettingService 為 Singleton
+                    services.AddSingleton<SettingsService>();
+                    services.AddSingleton<MainViewModel>();
+
+                    // Windows
+                    services.AddSingleton<MainWindow>();      // 讓 DI 負責 MainWindow
+                })
+                .Build();
+
+            // 啟動背景服務
+            await host.StartAsync();
+
+            host.Services.GetRequiredService<SettingsService>()
+                     .LoadAsync().GetAwaiter().GetResult();
+
+            App.Services = host.Services;
+
+            BuildAvaloniaApp()
+                .StartWithClassicDesktopLifetime(args);
+
+            // UI 全關→回來；優雅停止並釋放
+            await host.StopAsync();
+        }
 
         // Avalonia configuration, don't remove; also used by visual designer.
         public static AppBuilder BuildAvaloniaApp()

@@ -1,18 +1,21 @@
 using Avalonia.Controls;
+using CryptoWidget.Services;
 
 namespace CryptoWidget
 {
     public partial class SettingsWindow : Window
     {
-        public SettingsWindow()
+        public SettingsWindow(SettingsService settings)
         {
             InitializeComponent();
+            DataContext = settings;
 
             this.PointerPressed += (_, e) =>
             {
                 if (e.GetCurrentPoint(this).Properties.IsLeftButtonPressed)
                     BeginMoveDrag(e);
             };
+
         }
 
         // Ãö³¬«ö¶s
