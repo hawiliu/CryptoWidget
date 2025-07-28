@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace CryptoWidget.Services.Dto
 {
@@ -11,6 +7,10 @@ namespace CryptoWidget.Services.Dto
         public double OpacityLevel { get; set; }
 
         public bool KeepOnTop { get; set; }
+
+        public bool CloseOnExit { get; set; }
+
+        public string SelectedExchange { get; set; } = "binance";
 
         public List<string> CryptoList { get; set; }
     }

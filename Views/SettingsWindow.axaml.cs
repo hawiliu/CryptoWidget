@@ -1,6 +1,5 @@
 using Avalonia.Controls;
 using CryptoWidget.Services;
-using System.Collections.ObjectModel;
 
 namespace CryptoWidget
 {
@@ -18,8 +17,20 @@ namespace CryptoWidget
 
             this.PointerPressed += (_, e) =>
             {
-                if (e.GetCurrentPoint(this).Properties.IsLeftButtonPressed)
+                var point = e.GetCurrentPoint(this);
+                if (point.Properties.IsLeftButtonPressed)
+                {
+                    // 檢查點擊的來源是否為控制項（如 ComboBox、Button 等）
+                    var source = e.Source;
+                    if (source is Avalonia.Controls.Control control)
+                    {
+                        // 如果是 ComboBox 或其子元素，不處理拖拽
+                        if (IsComboBoxOrChild(control))
+                            return;
+                    }
+
                     BeginMoveDrag(e);
+                }
             };
         }
 
@@ -53,6 +64,20 @@ namespace CryptoWidget
 
                 Close();
             }
+        }
+
+        // 檢查控制項是否為 ComboBox 或其子元素
+        private bool IsComboBoxOrChild(Avalonia.Controls.Control control)
+        {
+            var current = control;
+            while (current != null)
+            {
+                if (current is ComboBox || current is Button || current is CheckBox || current is RadioButton)
+                    return true;
+
+                current = current.Parent as Avalonia.Controls.Control;
+            }
+            return false;
         }
     }
 }

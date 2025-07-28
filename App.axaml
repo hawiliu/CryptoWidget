@@ -22,7 +22,8 @@
         <TrayIcons>
             <!-- icon 參考 https://icon-icons.com/icon/usd-crypto-cryptocurrency-cryptocurrencies-cash-money-bank-payment/95103 -->
             <TrayIcon Icon="/Assets/cryptowidget-logo.ico" 
-                      ToolTipText="CryptoWidget - 加密貨幣價格監控">
+                      ToolTipText="CryptoWidget - 加密貨幣價格監控"
+                      Clicked="TrayIcon_Clicked">
                 <TrayIcon.Menu>
                     <NativeMenu>
                         <NativeMenuItem Header="顯示主視窗" Click="ShowMainWindow_Click"/>

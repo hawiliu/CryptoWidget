@@ -37,11 +37,21 @@ namespace CryptoWidget.ViewModels
         {
             try
             {
-                var prices = await PriceService.GetCryptoPricesAsync(Settings.CryptoList.ToList());
+                var prices = await PriceService.GetCryptoPricesAsync(Settings.CryptoList.ToList(), Settings.SelectedExchange);
                 if (prices.Count == 0)
                     PriceLines = "Empty";
                 else
-                    PriceLines = string.Join('\n', prices.Select(p => $"{p.Key}: {FormatPrice(p.Value)}"));
+                    PriceLines = string.Join('\n', prices.Select(p =>
+                    {
+                        if (p.Value.HasValue)
+                        {
+                            return $"{p.Key}:\t{FormatPrice(p.Value.Value)}";
+                        }
+                        else
+                        {
+                            return $"{p.Key}:\tError";
+                        }
+                    }));
             }
             catch
             {

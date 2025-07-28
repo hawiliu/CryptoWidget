@@ -6,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
-using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 
@@ -17,7 +16,8 @@ namespace CryptoWidget.Services
         private readonly IMapper _mapper;
         private readonly string _configPath;
 
-        public SettingsService(IMapper mapper) {
+        public SettingsService(IMapper mapper)
+        {
             _mapper = mapper;
             _configPath = Path.Combine(
                 Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
@@ -31,9 +31,18 @@ namespace CryptoWidget.Services
         private bool keepOnTop = false;
 
         [ObservableProperty]
+        private bool closeOnExit = false;
+
+        // 支援的交易所清單
+        public static List<string> SupportedExchanges { get { return ExchangeUtil.GetExchanges(); } }
+
+        [ObservableProperty]
+        private string selectedExchange = "binance";
+
+        [ObservableProperty]
         private ObservableCollection<string> cryptoList = new ObservableCollection<string>() { "BTC/USDT" };
 
-        [ObservableProperty] 
+        [ObservableProperty]
         private string newCryptoSymbol = string.Empty;
 
         public async Task LoadAsync()
@@ -59,7 +68,7 @@ namespace CryptoWidget.Services
                 JsonSerializer.Serialize(dto, new JsonSerializerOptions { WriteIndented = true }));
         }
 
-        [RelayCommand]                // AddCryptoCommand
+        [RelayCommand]
         private void AddCrypto()
         {
             var sym = NewCryptoSymbol.Trim().ToUpper();
@@ -70,13 +79,10 @@ namespace CryptoWidget.Services
             NewCryptoSymbol = string.Empty;               // 清空輸入框
         }
 
-        [RelayCommand]                // RemoveCryptoCommand (CommandParameter 傳入要刪的字串)
+        [RelayCommand]
         private void RemoveCrypto(string symbol)
         {
             if (symbol is not null) CryptoList.Remove(symbol);
         }
-
-        // 移除透明度改變時的自動保存，改為手動保存
-        // partial void OnOpacityLevelChanged(double oldValue, double newValue) => _ = SaveAsync();
     }
 }

@@ -63,6 +63,7 @@
           Content="&#xE115;"
           Command="{Binding OpenSettingsCommand}"/>
 
+        <!-- 關閉按鈕 -->
         <Button Grid.Row="0"
           HorizontalAlignment="Right"
           VerticalAlignment="Center"

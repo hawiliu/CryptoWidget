@@ -19,7 +19,8 @@
         Opacity="{Binding OpacityLevel}">
 
   <Border CornerRadius="10"
-          Margin="10" Padding="10">
+          Margin="10" Padding="10"
+          >
 
     <Grid>
       <Grid.RowDefinitions>
@@ -52,7 +53,7 @@
                     VerticalScrollBarVisibility="Auto"
                     HorizontalScrollBarVisibility="Disabled"
                     Margin="0,0,10,0">
-                <StackPanel Spacing="10" Margin="0,0,20,0" VerticalAlignment="Center">
+                <StackPanel Spacing="10" Margin="0,0,20,0">
           <!-- 透明度 -->
           <Grid>
             <Grid.ColumnDefinitions>
@@ -75,6 +76,35 @@
             </Grid.ColumnDefinitions>
             <TextBlock Grid.Column="0" Text="保持最上層" Foreground="White" FontSize="14" FontWeight="Bold" VerticalAlignment="Center"/>
             <CheckBox Grid.Column="1" IsChecked="{Binding KeepOnTop}" VerticalAlignment="Center" />
+          </Grid>
+
+          <!-- 關閉行為 -->
+          <Grid>
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="*"/>
+              <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0" Text="點擊關閉按鈕時" Foreground="White" FontSize="14" FontWeight="Bold" VerticalAlignment="Center"/>
+            <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+              <RadioButton Content="隱藏" IsChecked="{Binding CloseOnExit, Converter={x:Static BoolConverters.Not}}" 
+                          Foreground="White" Margin="0,0,10,0"/>
+              <RadioButton Content="關閉" IsChecked="{Binding CloseOnExit}" 
+                          Foreground="White"/>
+            </StackPanel>
+          </Grid>
+
+          <!-- 交易所選擇 -->
+          <Grid>
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="*"/>
+              <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0" Text="交易所" Foreground="White" FontSize="14" FontWeight="Bold" VerticalAlignment="Center"/>
+            <ComboBox Grid.Column="1" 
+                      ItemsSource="{Binding Source={x:Static svc:SettingsService.SupportedExchanges}}"
+                      SelectedItem="{Binding SelectedExchange}"
+                      Width="160"
+                      VerticalAlignment="Center"/>
           </Grid>
 
           <!-- 幣種輸入＋新增 -->

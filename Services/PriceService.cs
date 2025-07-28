@@ -1,55 +1,83 @@
 ﻿using ccxt;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace CryptoWidget.Services
 {
     public static class PriceService
     {
-        private static readonly Binance _exchange = new Binance();
-
-        public static async Task<Dictionary<string, double>> GetCryptoPricesAsync(List<string> symbols)
+        public static async Task<Dictionary<string, double?>> GetCryptoPricesAsync(List<string> symbols, string exchangeName = "binance")
         {
-            var prices = new Dictionary<string, double>();
+            var prices = new Dictionary<string, double?>();
             if (symbols == null || symbols.Count == 0)
                 return prices;
 
             try
             {
-                // 設置為合約市場
-                _exchange.options["defaultType"] = "swap";
-                
-                // 將現貨符號轉換為合約符號格式
-                var contractSymbols = symbols.Select(symbol => 
+                // 動態創建交易所實例
+                var exchange = ExchangeUtil.Create(exchangeName);
+                if (exchange == null)
                 {
-                    // 如果已經是合約格式（包含 :USDT），直接返回
-                    if (symbol.Contains(":USDT"))
-                        return symbol;
-                    
-                    // 將現貨符號轉換為合約符號格式
-                    return $"{symbol}:USDT";
-                }).ToList();
+                    // 如果創建失敗，回退到 Binance
+                    exchange = new Binance();
+                }
 
-                var ticker = await _exchange.FetchTickers(contractSymbols);
+                // 逐個處理每個符號
+                foreach (var symbol in symbols)
+                {
+                    double? price = null;
 
-                prices = ticker.tickers.Values
-                    .Where(v => v.last.HasValue && v.last.Value > 0)
-                    .Select(v => new { 
-                        symbol = v.symbol?.Replace(":USDT", ""), // 移除合約後綴以保持與原符號一致
-                        v.last 
-                    })
-                    .ToDictionary(v => v.symbol!, v => v.last ?? 0);
+                    try
+                    {
+                        // 嘗試合約市場
+                        exchange.options["defaultType"] = "swap";
+
+                        string contractSymbol;
+                        if (symbol.Contains(":USDT"))
+                        {
+                            contractSymbol = symbol;
+                        }
+                        else
+                        {
+                            contractSymbol = $"{symbol}:USDT";
+                        }
+
+                        var ticker = await exchange.FetchTicker(contractSymbol);
+                        if (ticker.last.HasValue && ticker.last.Value > 0)
+                        {
+                            price = ticker.last.Value;
+                        }
+                    }
+                    catch (System.Exception)
+                    {
+                        try
+                        {
+                            // 如果合約市場失敗，嘗試現貨市場
+                            exchange.options["defaultType"] = "spot";
+                            var ticker = await exchange.FetchTicker(symbol);
+                            if (ticker.last.HasValue && ticker.last.Value > 0)
+                            {
+                                price = ticker.last.Value;
+                            }
+                        }
+                        catch (System.Exception)
+                        {
+                            // 如果現貨市場也失敗，價格保持為 null
+                            price = null;
+                        }
+                    }
+
+                    // 將結果加入字典
+                    prices[symbol] = price;
+                }
             }
-            catch (System.Exception ex)
+            catch (System.Exception)
             {
-                // 如果合約市場失敗，回退到現貨市場
-                _exchange.options["defaultType"] = "spot";
-                var ticker = await _exchange.FetchTickers(symbols);
-                prices = ticker.tickers.Values
-                    .Where(v => v.last.HasValue && v.last.Value > 0)
-                    .Select(v => new { v.symbol, v.last })
-                    .ToDictionary(v => v.symbol!, v => v.last ?? 0);
+                // 如果交易所創建失敗，所有價格設為 null
+                foreach (var symbol in symbols)
+                {
+                    prices[symbol] = null;
+                }
             }
 
             return prices;

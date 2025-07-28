@@ -29,7 +29,7 @@
 
       <!-- 標題 -->
       <TextBlock Grid.Row="0" 
-                 Text="CryptoWidget" 
+                 Text="{x:Static svc:VersionInfo.ProductName}" 
                  Foreground="White" 
                  FontSize="24" 
                  FontWeight="Bold" 

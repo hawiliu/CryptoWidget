@@ -1,7 +1,6 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
-using Avalonia.Data.Core;
 using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
 using CryptoWidget.ViewModels;
@@ -15,6 +14,8 @@ namespace CryptoWidget
     {
         public static IServiceProvider? Services { get; set; }
 
+        private TrayIcon? _trayIcon;      // 保留參考以便 Dispose
+
         public override void Initialize()
         {
             AvaloniaXamlLoader.Load(this);
@@ -27,6 +28,14 @@ namespace CryptoWidget
                 // Avoid duplicate validations from both Avalonia and the CommunityToolkit. 
                 // More info: https://docs.avaloniaui.net/docs/guides/development-guides/data-validation#manage-validationplugins
                 DisableAvaloniaDataAnnotationValidation();
+
+                desktop.ShutdownMode = ShutdownMode.OnMainWindowClose;
+                desktop.Exit += OnExit;
+
+                // 取出 XAML 產生的第一顆 TrayIcon
+                var icons = TrayIcon.GetIcons(this);
+                if (icons?.Count > 0)
+                    _trayIcon = icons[0];
 
                 desktop.MainWindow = Services!.GetRequiredService<MainWindow>();
             }
@@ -44,6 +53,29 @@ namespace CryptoWidget
             foreach (var plugin in dataValidationPluginsToRemove)
             {
                 BindingPlugins.DataValidators.Remove(plugin);
+            }
+        }
+
+        // 雙擊檢測變數
+        private DateTime _lastClickTime = DateTime.MinValue;
+        private const int DOUBLE_CLICK_TIME_MS = 500; // 雙擊時間間隔（毫秒）
+
+        // TrayIcon 雙擊事件處理
+        private async void TrayIcon_Clicked(object? sender, EventArgs e)
+        {
+            var currentTime = DateTime.Now;
+            var timeDiff = (currentTime - _lastClickTime).TotalMilliseconds;
+
+            if (timeDiff <= DOUBLE_CLICK_TIME_MS)
+            {
+                // 雙擊 - 顯示主視窗
+                ShowMainWindow_Click(sender, e);
+                _lastClickTime = DateTime.MinValue; // 重置，避免連續觸發
+            }
+            else
+            {
+                // 單擊 - 記錄時間
+                _lastClickTime = currentTime;
             }
         }
 
@@ -81,6 +113,11 @@ namespace CryptoWidget
             {
                 desktop.Shutdown();
             }
+        }
+
+        private void OnExit(object? sender, ControlledApplicationLifetimeExitEventArgs e)
+        {
+            _trayIcon?.Dispose();
         }
     }
 }
