@@ -13,7 +13,7 @@
         MinHeight="100"
         CanResize="True"
         WindowStartupLocation="CenterScreen"
-        Topmost="True"
+        Topmost="{Binding Settings.KeepOnTop}"
         ExtendClientAreaToDecorationsHint="True"
         ExtendClientAreaChromeHints="NoChrome"
         ShowInTaskbar="False"
