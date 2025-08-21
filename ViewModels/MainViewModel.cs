@@ -45,7 +45,7 @@ namespace CryptoWidget.ViewModels
                     {
                         if (p.Value.HasValue)
                         {
-                            return $"{p.Key}:\t{FormatPrice(p.Value.Value)}";
+                            return $"{p.Key}:\t{p.Value.Value}";
                         }
                         else
                         {
