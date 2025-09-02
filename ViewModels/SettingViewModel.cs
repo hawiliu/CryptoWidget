@@ -74,7 +74,7 @@ namespace CryptoWidget.ViewModels
         {
             var sym = NewCryptoSymbol.Trim().ToUpper();
             if (string.IsNullOrWhiteSpace(sym)) return;
-            if (!sym.Contains('/')) sym += "/USDT";       // 允許輸入 BTC 自動補 /USDT
+            if (!sym.Contains('/') && !sym.Contains(':')) sym += "/USDT";       // 允許輸入 BTC 自動補 /USDT
             if (!CryptoList.Contains(sym))
                 CryptoList.Add(sym);
             NewCryptoSymbol = string.Empty;               // 清空輸入框

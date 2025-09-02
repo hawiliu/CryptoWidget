@@ -27,43 +27,31 @@ namespace CryptoWidget.Services
                 {
                     double? price = null;
 
-                    try
+                    // 判斷幣種格式並選擇優先市場
+                    bool isContractFormat = symbol.Contains(":USDT");
+                    bool isSpotFormat = symbol.Contains("/USDT");
+                    
+                    if (isContractFormat)
                     {
-                        // 嘗試合約市場
-                        exchange.options["defaultType"] = "swap";
-
-                        string contractSymbol;
-                        if (symbol.Contains(":USDT"))
+                        // 合約格式：優先嘗試合約市場，失敗時回退到現貨市場
+                        price = await TryGetPriceAsync(exchange, symbol, true);
+                        if (price == null)
                         {
-                            contractSymbol = symbol;
-                        }
-                        else
-                        {
-                            contractSymbol = $"{symbol}:USDT";
-                        }
-
-                        var ticker = await exchange.FetchTicker(contractSymbol);
-                        if (ticker.last.HasValue && ticker.last.Value > 0)
-                        {
-                            price = ticker.last.Value;
+                            // 合約市場失敗，嘗試現貨市場
+                            string spotSymbol = symbol.Replace(":", "/");
+                            price = await TryGetPriceAsync(exchange, spotSymbol, false);
                         }
                     }
-                    catch (System.Exception)
+                    else
                     {
-                        try
+                        // 簡短格式或完整格式：優先嘗試現貨市場，失敗時嘗試合約市場
+                        string spotSymbol = isSpotFormat ? symbol : $"{symbol}/USDT";
+                        price = await TryGetPriceAsync(exchange, spotSymbol, false);
+                        if (price == null)
                         {
-                            // 如果合約市場失敗，嘗試現貨市場
-                            exchange.options["defaultType"] = "spot";
-                            var ticker = await exchange.FetchTicker(symbol);
-                            if (ticker.last.HasValue && ticker.last.Value > 0)
-                            {
-                                price = ticker.last.Value;
-                            }
-                        }
-                        catch (System.Exception)
-                        {
-                            // 如果現貨市場也失敗，價格保持為 null
-                            price = null;
+                            // 現貨市場失敗，嘗試合約市場
+                            string contractSymbol = symbol.Replace("/", ":");
+                            price = await TryGetPriceAsync(exchange, contractSymbol, true);
                         }
                     }
 
@@ -81,6 +69,34 @@ namespace CryptoWidget.Services
             }
 
             return prices;
+        }
+
+        /// <summary>
+        /// 嘗試從指定市場獲取價格
+        /// </summary>
+        /// <param name="exchange">交易所實例</param>
+        /// <param name="symbol">幣種符號</param>
+        /// <param name="isContract">是否為合約市場</param>
+        /// <returns>價格，失敗時返回 null</returns>
+        private static async Task<double?> TryGetPriceAsync(Exchange exchange, string symbol, bool isContract)
+        {
+            try
+            {
+                // 設定市場類型
+                exchange.options["defaultType"] = isContract ? "swap" : "spot";
+                
+                var ticker = await exchange.FetchTicker(symbol);
+                if (ticker.last.HasValue && ticker.last.Value > 0)
+                {
+                    return ticker.last.Value;
+                }
+            }
+            catch (System.Exception)
+            {
+                // 價格獲取失敗，返回 null
+            }
+            
+            return null;
         }
     }
 }
