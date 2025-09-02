@@ -9,24 +9,21 @@ namespace CryptoWidget.ViewModels
 {
     public partial class MainViewModel : ViewModelBase
     {
-        private readonly SettingsService _settingsService;
+        private readonly SettingViewModel _settingViewModel;
 
         public SettingsWindow? _settingWindow;
 
         public AboutWindow? _aboutWindow;
 
-        public MainViewModel() { }
-
-        public MainViewModel(SettingsService settingsService)
+        public MainViewModel(SettingViewModel settingViewModel)
         {
-            _settingsService = settingsService;
+            _settingViewModel = settingViewModel;
 
-            UpdatePrices();
             _timer.Elapsed += async (s, e) => await UpdatePrices();
             _timer.Start();
         }
 
-        public SettingsService Settings { get { return _settingsService; } }   // 供 XAML 綁定
+        public SettingViewModel Settings { get { return _settingViewModel; } }   // 供 XAML 綁定
 
         [ObservableProperty]
         private string priceLines = "Loading...";
@@ -86,7 +83,7 @@ namespace CryptoWidget.ViewModels
         [RelayCommand]
         private void OpenSettings()
         {
-            _settingWindow = new SettingsWindow(_settingsService)
+            _settingWindow = new SettingsWindow(_settingViewModel)
             {
                 WindowStartupLocation = Avalonia.Controls.WindowStartupLocation.CenterOwner
             };
@@ -96,7 +93,7 @@ namespace CryptoWidget.ViewModels
         [RelayCommand]
         private void OpenAbout()
         {
-            _aboutWindow = new AboutWindow(_settingsService)
+            _aboutWindow = new AboutWindow(_settingViewModel)
             {
                 WindowStartupLocation = Avalonia.Controls.WindowStartupLocation.CenterOwner
             };

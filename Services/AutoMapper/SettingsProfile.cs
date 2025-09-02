@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using CryptoWidget.Services.Dto;
+using CryptoWidget.ViewModels;
 
 namespace CryptoWidget.Services.AutoMapper
 {
@@ -8,7 +9,7 @@ namespace CryptoWidget.Services.AutoMapper
         public SettingsProfile()
         {
             // 雙向對應：OpacityLevel 會自動匹配
-            CreateMap<SettingsService, SettingsDto>().ReverseMap();
+            CreateMap<SettingViewModel, SettingsDto>().ReverseMap();
         }
     }
 }

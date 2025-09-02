@@ -61,7 +61,7 @@ namespace CryptoWidget
         private const int DOUBLE_CLICK_TIME_MS = 500; // 雙擊時間間隔（毫秒）
 
         // TrayIcon 雙擊事件處理
-        private async void TrayIcon_Clicked(object? sender, EventArgs e)
+        private void TrayIcon_Clicked(object? sender, EventArgs e)
         {
             var currentTime = DateTime.Now;
             var timeDiff = (currentTime - _lastClickTime).TotalMilliseconds;

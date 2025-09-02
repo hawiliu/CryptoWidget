@@ -1,9 +1,11 @@
 using System.Reflection;
 
-namespace CryptoWidget.Services
+namespace CryptoWidget.ViewModels
 {
-    public static class VersionInfo
+    public sealed partial class AboutViewModel : ViewModelBase
     {
+        public AboutViewModel() { }
+
         public static string Version
         {
             get
@@ -68,3 +70,4 @@ namespace CryptoWidget.Services
         }
     }
 }
+

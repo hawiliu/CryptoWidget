@@ -1,11 +1,16 @@
 using Avalonia.Controls;
-using CryptoWidget.Services;
+using CryptoWidget.ViewModels;
 
 namespace CryptoWidget
 {
     public partial class AboutWindow : Window
     {
-        public AboutWindow(SettingsService settings)
+        public AboutWindow()
+        {
+            InitializeComponent();
+        }
+
+        public AboutWindow(SettingViewModel settings)
         {
             InitializeComponent();
             DataContext = settings;

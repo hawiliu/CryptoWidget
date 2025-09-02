@@ -12,6 +12,6 @@ namespace CryptoWidget.Services.Dto
 
         public string SelectedExchange { get; set; } = "binance";
 
-        public List<string> CryptoList { get; set; }
+        public List<string> CryptoList { get; set; } = new List<string>();
     }
 }

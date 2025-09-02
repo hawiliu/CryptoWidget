@@ -1,5 +1,5 @@
 using Avalonia.Controls;
-using CryptoWidget.Services;
+using CryptoWidget.ViewModels;
 
 namespace CryptoWidget
 {
@@ -10,7 +10,7 @@ namespace CryptoWidget
             InitializeComponent();
         }
 
-        public SettingsWindow(SettingsService settings)
+        public SettingsWindow(SettingViewModel settings)
         {
             InitializeComponent();
             DataContext = settings;
@@ -39,7 +39,7 @@ namespace CryptoWidget
 
         private void RemoveCrypto_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
         {
-            if (sender is Button button && button.Tag is string symbol && DataContext is SettingsService settings)
+            if (sender is Button button && button.Tag is string symbol && DataContext is SettingViewModel settings)
             {
                 settings.RemoveCryptoCommand.Execute(symbol);
             }
@@ -47,7 +47,7 @@ namespace CryptoWidget
 
         private async void SaveButton_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
         {
-            if (DataContext is SettingsService settings)
+            if (DataContext is SettingViewModel settings)
             {
                 // 保存設定
                 await settings.SaveAsync();
@@ -57,7 +57,7 @@ namespace CryptoWidget
 
         private async void CancelButton_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
         {
-            if (DataContext is SettingsService settings)
+            if (DataContext is SettingViewModel settings)
             {
                 // 還原設定
                 await settings.LoadAsync();

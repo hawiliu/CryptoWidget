@@ -1,6 +1,7 @@
-﻿using AutoMapper;
+using AutoMapper;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CryptoWidget.Services;
 using CryptoWidget.Services.Dto;
 using System;
 using System.Collections.Generic;
@@ -9,14 +10,14 @@ using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace CryptoWidget.Services
+namespace CryptoWidget.ViewModels
 {
-    public sealed partial class SettingsService : ObservableObject
+    public sealed partial class SettingViewModel : ViewModelBase
     {
         private readonly IMapper _mapper;
         private readonly string _configPath;
 
-        public SettingsService(IMapper mapper)
+        public SettingViewModel(IMapper mapper)
         {
             _mapper = mapper;
             _configPath = Path.Combine(

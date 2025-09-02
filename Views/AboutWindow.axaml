@@ -1,11 +1,11 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:svc="clr-namespace:CryptoWidget.Services;assembly=CryptoWidget"
+        xmlns:svc="clr-namespace:CryptoWidget.ViewModels;assembly=CryptoWidget"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="300" d:DesignHeight="250"
         x:Class="CryptoWidget.AboutWindow"
-        x:DataType="svc:SettingsService"
+        x:DataType="svc:SettingViewModel"
         Width="300" Height="250"
         Title="關於"
         Topmost="{Binding KeepOnTop}"
@@ -29,7 +29,7 @@
 
       <!-- 標題 -->
       <TextBlock Grid.Row="0" 
-                 Text="{x:Static svc:VersionInfo.ProductName}" 
+                 Text="{x:Static svc:AboutViewModel.ProductName}" 
                  Foreground="White" 
                  FontSize="24" 
                  FontWeight="Bold" 
@@ -40,19 +40,19 @@
       <StackPanel Grid.Row="1" 
                   Spacing="10" 
                   VerticalAlignment="Center">
-        <TextBlock Text="{x:Static svc:VersionInfo.Version}" 
+        <TextBlock Text="{x:Static svc:AboutViewModel.Version}" 
                    Foreground="White" 
                    FontSize="16" 
                    HorizontalAlignment="Center"/>
-        <TextBlock Text="{x:Static svc:VersionInfo.Description}" 
+        <TextBlock Text="{x:Static svc:AboutViewModel.Description}" 
                    Foreground="Gray" 
                    FontSize="14" 
                    HorizontalAlignment="Center"/>
-        <TextBlock Text="{x:Static svc:VersionInfo.Author}" 
+        <TextBlock Text="{x:Static svc:AboutViewModel.Author}" 
                    Foreground="Gray" 
                    FontSize="12" 
                    HorizontalAlignment="Center"/>
-        <TextBlock Text="{x:Static svc:VersionInfo.Copyright}" 
+        <TextBlock Text="{x:Static svc:AboutViewModel.Copyright}" 
                    Foreground="Gray" 
                    FontSize="10" 
                    HorizontalAlignment="Center"/>

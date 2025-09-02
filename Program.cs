@@ -1,5 +1,4 @@
 ﻿using Avalonia;
-using CryptoWidget.Services;
 using CryptoWidget.Services.AutoMapper;
 using CryptoWidget.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
@@ -27,9 +26,8 @@ namespace CryptoWidget
                         cfg.AddProfile<SettingsProfile>();
                     });
 
-                    // 註冊 SettingService 為 Singleton
-                    services.AddSingleton<SettingsService>();
                     services.AddSingleton<MainViewModel>();
+                    services.AddSingleton<SettingViewModel>();
 
                     // Windows
                     services.AddSingleton<MainWindow>();      // 讓 DI 負責 MainWindow
@@ -39,7 +37,7 @@ namespace CryptoWidget
             // 啟動背景服務
             await host.StartAsync();
 
-            host.Services.GetRequiredService<SettingsService>()
+            host.Services.GetRequiredService<SettingViewModel>()
                      .LoadAsync().GetAwaiter().GetResult();
 
             App.Services = host.Services;
