@@ -4,6 +4,10 @@
 
 ![CryptoWidget](Assets/cryptowidget-logo.ico)
 
+## 📱 截圖
+
+![MainWindow](Readme/mainWindow.PNG)
+
 ## 🌟 功能特色
 
 ### 📊 即時價格監控
@@ -82,7 +86,7 @@
 
 ## 📄 授權條款
 
-本專案採用 MIT 授權條款 - 詳見 [LICENSE](LICENSE) 檔案
+本專案採用 MIT 授權條款
 
 ## 🙏 致謝
 
