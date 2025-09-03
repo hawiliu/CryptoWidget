@@ -30,7 +30,7 @@ namespace CryptoWidget.Services
                     // 判斷幣種格式並選擇優先市場
                     bool isContractFormat = symbol.Contains(":USDT");
                     bool isSpotFormat = symbol.Contains("/USDT");
-                    
+
                     if (isContractFormat)
                     {
                         // 合約格式：優先嘗試合約市場，失敗時回退到現貨市場
@@ -84,7 +84,7 @@ namespace CryptoWidget.Services
             {
                 // 設定市場類型
                 exchange.options["defaultType"] = isContract ? "swap" : "spot";
-                
+
                 var ticker = await exchange.FetchTicker(symbol);
                 if (ticker.last.HasValue && ticker.last.Value > 0)
                 {
@@ -95,7 +95,7 @@ namespace CryptoWidget.Services
             {
                 // 價格獲取失敗，返回 null
             }
-            
+
             return null;
         }
     }

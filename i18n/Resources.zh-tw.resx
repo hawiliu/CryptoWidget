@@ -1,0 +1,199 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 1.3
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">1.3</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1">this is my long string</data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+      [base64 mime encoded serialized .NET Framework object]
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+      [base64 mime encoded string representing a byte array form of the .NET Framework object]
+    </data>
+    
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+      : System.Serialization.Formatters.Binary.BinaryFormatter
+      : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+      : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+      : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+      : using a System.ComponentModel.TypeConverter
+      : and then encoded with base64 encoding.
+  -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>1.3</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <!-- 應用程式標題 -->
+  <data name="AppTitle" xml:space="preserve">
+    <value>CryptoWidget</value>
+    <comment>應用程式標題</comment>
+  </data>
+  <!-- 主視窗相關 -->
+  <data name="MainWindowTitle" xml:space="preserve">
+    <value>CryptoWidget</value>
+    <comment>主視窗標題</comment>
+  </data>
+  <!-- 設定視窗相關 -->
+  <data name="SettingsWindowTitle" xml:space="preserve">
+    <value>設定</value>
+    <comment>設定視窗標題</comment>
+  </data>
+  <data name="SettingsTitle" xml:space="preserve">
+    <value>設定</value>
+    <comment>設定標題</comment>
+  </data>
+  <data name="Settings_OpacityLabel" xml:space="preserve">
+    <value>視窗透明度</value>
+    <comment>透明度標籤</comment>
+  </data>
+  <data name="Settings_KeepOnTopLabel" xml:space="preserve">
+    <value>保持最上層</value>
+    <comment>保持最上層標籤</comment>
+  </data>
+  <data name="Settings_CloseBehaviorLabel" xml:space="preserve">
+    <value>點擊關閉按鈕時</value>
+    <comment>關閉行為標籤</comment>
+  </data>
+  <data name="Settings_HideOption" xml:space="preserve">
+    <value>隱藏</value>
+    <comment>隱藏選項</comment>
+  </data>
+  <data name="Settings_CloseOption" xml:space="preserve">
+    <value>關閉</value>
+    <comment>關閉選項</comment>
+  </data>
+  <data name="Settings_ExchangeLabel" xml:space="preserve">
+    <value>交易所</value>
+    <comment>交易所標籤</comment>
+  </data>
+  <data name="Settings_AddCryptoLabel" xml:space="preserve">
+    <value>新增幣種</value>
+    <comment>新增幣種標籤</comment>
+  </data>
+  <data name="Settings_AddCryptoWatermark" xml:space="preserve">
+    <value>e.g. BTC 或 BTC/USDT 或 BTC:USDT</value>
+    <comment>新增幣種水印</comment>
+  </data>
+  <data name="Settings_SymbolLabel" xml:space="preserve">
+    <value>交易對</value>
+    <comment>交易對標籤</comment>
+  </data>
+  <!-- 關於視窗相關 -->
+  <data name="AboutWindowTitle" xml:space="preserve">
+    <value>關於</value>
+    <comment>關於視窗標題</comment>
+  </data>
+  <data name="Btn_OK" xml:space="preserve">
+    <value>確定</value>
+    <comment>確定按鈕</comment>
+  </data>
+  <!-- 通用按鈕和操作 -->
+  <data name="Btn_Save" xml:space="preserve">
+    <value>儲存</value>
+    <comment>儲存</comment>
+  </data>
+  <data name="Btn_Cancel" xml:space="preserve">
+    <value>取消</value>
+    <comment>取消</comment>
+  </data>
+  <!-- 錯誤和提示訊息 -->
+  <!-- 狀態訊息 -->
+  <!-- 工具提示 -->
+  <data name="Tooltip_Settings" xml:space="preserve">
+    <value>設定</value>
+    <comment>設定按鈕工具提示</comment>
+  </data>
+  <data name="Tooltip_About" xml:space="preserve">
+    <value>關於</value>
+    <comment>關於按鈕工具提示</comment>
+  </data>
+  <data name="Tooltip_Close" xml:space="preserve">
+    <value>關閉</value>
+    <comment>關閉按鈕工具提示</comment>
+  </data>
+  <data name="Tooltip_ShowMainWindow" xml:space="preserve">
+    <value>顯示主視窗</value>
+    <comment>顯示主視窗選單項目</comment>
+  </data>
+  <data name="Settings_LanguageLabel" xml:space="preserve">
+    <value>語言</value>
+    <comment>語言選擇標籤</comment>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>加密貨幣價格監控小工具</value>
+  </data>
+</root>

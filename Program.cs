@@ -16,7 +16,7 @@ namespace CryptoWidget
         [STAThread]
         public static async Task Main(string[] args)
         {
-            // ① 建立 Generic Host
+            // 建立 Generic Host
             using var host = Host.CreateDefaultBuilder(args)
                 .ConfigureServices(services =>
                 {
@@ -45,7 +45,7 @@ namespace CryptoWidget
             BuildAvaloniaApp()
                 .StartWithClassicDesktopLifetime(args);
 
-            // UI 全關→回來；優雅停止並釋放
+            // UI 全關→回來；停止並釋放
             await host.StopAsync();
         }
 

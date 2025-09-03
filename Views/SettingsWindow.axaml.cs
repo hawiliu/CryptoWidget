@@ -1,4 +1,5 @@
 using Avalonia.Controls;
+using CryptoWidget.Services.Dto;
 using CryptoWidget.ViewModels;
 
 namespace CryptoWidget
@@ -34,9 +35,6 @@ namespace CryptoWidget
             };
         }
 
-        private void CloseButton_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
-            => Close();
-
         private void RemoveCrypto_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
         {
             if (sender is Button button && button.Tag is string symbol && DataContext is SettingViewModel settings)
@@ -63,6 +61,14 @@ namespace CryptoWidget
                 await settings.LoadAsync();
 
                 Close();
+            }
+        }
+
+        private void OnSelectedLanguageChanged(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+        {
+            if (DataContext is SettingViewModel settings && sender is ComboBox comboBox)
+            {
+                settings.SelectedLanguageItemChanged((LanguageOption)comboBox.SelectedValue);
             }
         }
 

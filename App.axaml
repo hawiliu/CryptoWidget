@@ -2,6 +2,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              x:Class="CryptoWidget.App"
              xmlns:local="using:CryptoWidget"
+             xmlns:c="https://codewf.com"
              RequestedThemeVariant="Dark">
              <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
 
@@ -22,17 +23,17 @@
         <TrayIcons>
             <!-- icon 參考 https://icon-icons.com/icon/usd-crypto-cryptocurrency-cryptocurrencies-cash-money-bank-payment/95103 -->
             <TrayIcon Icon="/Assets/cryptowidget-logo.ico" 
-                      ToolTipText="CryptoWidget - 加密貨幣價格監控"
+                      ToolTipText="{c:I18n 'AppTitle'}"
                       Clicked="TrayIcon_Clicked">
                 <TrayIcon.Menu>
                     <NativeMenu>
-                        <NativeMenuItem Header="顯示主視窗" Click="ShowMainWindow_Click"/>
+                        <NativeMenuItem Header="{c:I18n 'Tooltip_ShowMainWindow'}" Click="ShowMainWindow_Click"/>
                         <NativeMenuItemSeparator />
-                        <NativeMenuItem Header="設定" Click="OpenSettings_Click"/>
+                        <NativeMenuItem Header="{c:I18n 'Tooltip_Settings'}" Click="OpenSettings_Click"/>
                         <NativeMenuItemSeparator />
-                        <NativeMenuItem Header="關於" Click="OpenAbout_Click"/>
+                        <NativeMenuItem Header="{c:I18n 'Tooltip_About'}" Click="OpenAbout_Click"/>
                         <NativeMenuItemSeparator />
-                        <NativeMenuItem Header="退出" Click="Exit_Click"/>
+                        <NativeMenuItem Header="{c:I18n 'Tooltip_Close'}" Click="Exit_Click"/>
                     </NativeMenu>
                 </TrayIcon.Menu>
             </TrayIcon>

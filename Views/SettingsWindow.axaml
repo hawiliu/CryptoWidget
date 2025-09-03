@@ -1,16 +1,18 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="using:CryptoWidget.ViewModels"
-        xmlns:svc="clr-namespace:CryptoWidget.ViewModels;assembly=CryptoWidget"
+        xmlns:svc="using:CryptoWidget.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:c="https://codewf.com"
+        xmlns:converters="using:Avalonia.Data.Converters"
         mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="400"
         x:Class="CryptoWidget.SettingsWindow"
         x:DataType="svc:SettingViewModel"
-        Width="400" Height="400"
+        Width="400" Height="450"
         MinWidth="400" MaxWidth="400"
-        MinHeight="400"
-        Title="設定"
+        MinHeight="450"
+        Title="{c:I18n 'SettingsWindowTitle'}"
         Topmost="{Binding KeepOnTop}"
         CanResize="True"
         ExtendClientAreaToDecorationsHint="True"
@@ -32,7 +34,7 @@
       <!-- 標題 -->
       <TextBlock Grid.Row="0"
                  VerticalAlignment="Center"
-                 Text="設定" Foreground="White" FontSize="18" FontWeight="Bold"/>
+                 Text="{c:I18n 'SettingsTitle'}" Foreground="White" FontSize="18" FontWeight="Bold"/>
 
       <!-- 右上角關閉按鈕 -->
       <Button Grid.Row="0"
@@ -46,7 +48,7 @@
               HorizontalContentAlignment="Center"
               VerticalContentAlignment="Center"
               Content="&#xE10A;"
-              Click="CloseButton_Click"/>
+              Click="CancelButton_Click"/>
 
       <!-- 中間內容區域（可滾動） -->
       <ScrollViewer Grid.Row="1" 
@@ -54,13 +56,35 @@
                     HorizontalScrollBarVisibility="Disabled"
                     Margin="0,0,10,0">
                 <StackPanel Spacing="10" Margin="0,0,20,0">
+
+          <!-- 語系選擇 -->
+          <Grid>
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="*"/>
+              <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0" Text="{c:I18n 'Settings_LanguageLabel'}" Foreground="White" FontSize="14" FontWeight="Bold" VerticalAlignment="Center"/>
+            <ComboBox Grid.Column="1" 
+                      ItemsSource="{Binding Source={x:Static svc:SettingViewModel.SupportedLanguages}}"
+                      SelectedItem="{Binding SelectedLanguageItem}"
+                      SelectionChanged="OnSelectedLanguageChanged"
+                      Width="160"
+                      VerticalAlignment="Center">
+              <ComboBox.ItemTemplate>
+                <DataTemplate>
+                  <TextBlock Text="{Binding .}" Foreground="White"/>
+                </DataTemplate>
+              </ComboBox.ItemTemplate>
+            </ComboBox>
+          </Grid>
+
           <!-- 透明度 -->
           <Grid>
             <Grid.ColumnDefinitions>
               <ColumnDefinition Width="*"/>
               <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" Text="視窗透明度" Foreground="White" FontSize="14" FontWeight="Bold" VerticalAlignment="Center"/>
+            <TextBlock Grid.Column="0" Text="{c:I18n 'Settings_OpacityLabel'}" Foreground="White" FontSize="14" FontWeight="Bold" VerticalAlignment="Center"/>
             <TextBlock Grid.Column="1" Foreground="White" VerticalAlignment="Center"
                      Text="{Binding OpacityLevel, StringFormat='{}{0:P0}'}"/>
           </Grid>
@@ -74,7 +98,7 @@
               <ColumnDefinition Width="*"/>
               <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" Text="保持最上層" Foreground="White" FontSize="14" FontWeight="Bold" VerticalAlignment="Center"/>
+            <TextBlock Grid.Column="0" Text="{c:I18n 'Settings_KeepOnTopLabel'}" Foreground="White" FontSize="14" FontWeight="Bold" VerticalAlignment="Center"/>
             <CheckBox Grid.Column="1" IsChecked="{Binding KeepOnTop}" VerticalAlignment="Center" />
           </Grid>
 
@@ -84,12 +108,12 @@
               <ColumnDefinition Width="*"/>
               <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" Text="點擊關閉按鈕時" Foreground="White" FontSize="14" FontWeight="Bold" VerticalAlignment="Center"/>
+            <TextBlock Grid.Column="0" Text="{c:I18n 'Settings_CloseBehaviorLabel'}" Foreground="White" FontSize="14" FontWeight="Bold" VerticalAlignment="Center"/>
             <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
-              <RadioButton Content="隱藏" IsChecked="{Binding CloseOnExit, Converter={x:Static BoolConverters.Not}}" 
-                          Foreground="White" Margin="0,0,10,0"/>
-              <RadioButton Content="關閉" IsChecked="{Binding CloseOnExit}" 
-                          Foreground="White"/>
+              <RadioButton Content="{c:I18n 'Settings_HideOption'}" IsChecked="{Binding CloseOnExit, Converter={x:Static converters:BoolConverters.Not}}" 
+                           Foreground="White" Margin="0,0,10,0"/>
+              <RadioButton Content="{c:I18n 'Settings_CloseOption'}" IsChecked="{Binding CloseOnExit}" 
+                           Foreground="White"/>
             </StackPanel>
           </Grid>
 
@@ -99,7 +123,7 @@
               <ColumnDefinition Width="*"/>
               <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" Text="交易所" Foreground="White" FontSize="14" FontWeight="Bold" VerticalAlignment="Center"/>
+            <TextBlock Grid.Column="0" Text="{c:I18n 'Settings_ExchangeLabel'}" Foreground="White" FontSize="14" FontWeight="Bold" VerticalAlignment="Center"/>
             <ComboBox Grid.Column="1" 
                       ItemsSource="{Binding Source={x:Static svc:SettingViewModel.SupportedExchanges}}"
                       SelectedItem="{Binding SelectedExchange}"
@@ -118,10 +142,10 @@
               <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
             <TextBlock Grid.Column="0" Grid.Row="0"
-                       Text="新增幣種" Foreground="White" FontSize="14" FontWeight="Bold" VerticalAlignment="Center"/>
+                       Text="{c:I18n 'Settings_AddCryptoLabel'}" Foreground="White" FontSize="14" FontWeight="Bold" VerticalAlignment="Center"/>
             <TextBox Grid.Column="0" Grid.Row="1"
                      VerticalAlignment="Center"
-                     Watermark="e.g. BTC 或 BTC/USDT"
+                     Watermark="{c:I18n 'Settings_AddCryptoWatermark'}"
                      Text="{Binding NewCryptoSymbol, UpdateSourceTrigger=PropertyChanged}" />
             <Button Grid.Column="1" Grid.Row="1"
                     Content="➕" Margin="5,0,0,0"
@@ -153,13 +177,15 @@
                   HorizontalAlignment="Right" 
                   Spacing="10"
                   Margin="0,10,0,0">
-        <Button Content="取消" 
+        <Button Content="{c:I18n 'Btn_Cancel'}" 
                 Width="60" Height="30"
+                FontSize="12"
                 HorizontalContentAlignment="Center" 
                 VerticalContentAlignment="Center"
                 Click="CancelButton_Click"/>
-        <Button Content="保存" 
+        <Button Content="{c:I18n 'Btn_Save'}" 
                 Width="60" Height="30"
+                FontSize="12"
                 HorizontalContentAlignment="Center" 
                 VerticalContentAlignment="Center"
                 Click="SaveButton_Click"/>

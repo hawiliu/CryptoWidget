@@ -1,13 +1,14 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:svc="clr-namespace:CryptoWidget.ViewModels;assembly=CryptoWidget"
+        xmlns:svc="using:CryptoWidget.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:c="https://codewf.com"
         mc:Ignorable="d" d:DesignWidth="300" d:DesignHeight="250"
         x:Class="CryptoWidget.AboutWindow"
         x:DataType="svc:SettingViewModel"
         Width="300" Height="250"
-        Title="關於"
+        Title="{c:I18n 'AboutWindowTitle'}"
         Topmost="{Binding KeepOnTop}"
         CanResize="False"
         WindowStartupLocation="CenterOwner"
@@ -46,7 +47,7 @@
                    HorizontalAlignment="Center"/>
         <TextBlock Text="{x:Static svc:AboutViewModel.Description}" 
                    Foreground="Gray" 
-                   FontSize="14" 
+                   FontSize="12" 
                    HorizontalAlignment="Center"/>
         <TextBlock Text="{x:Static svc:AboutViewModel.Author}" 
                    Foreground="Gray" 
@@ -60,7 +61,7 @@
 
       <!-- 關閉按鈕 -->
       <Button Grid.Row="2" 
-              Content="確定" 
+              Content="{c:I18n 'Btn_OK'}" 
               Width="80" Height="30"
               HorizontalAlignment="Center"
               HorizontalContentAlignment="Center"

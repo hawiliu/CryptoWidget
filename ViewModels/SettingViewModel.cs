@@ -3,10 +3,13 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CryptoWidget.Services;
 using CryptoWidget.Services.Dto;
+using Lang.Avalonia;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 
@@ -46,6 +49,31 @@ namespace CryptoWidget.ViewModels
         [ObservableProperty]
         private string newCryptoSymbol = string.Empty;
 
+        // 語系選擇
+        [ObservableProperty]
+        private string selectedLanguage = "en";
+
+        // 當前選中的語系項目
+        [ObservableProperty]
+        private LanguageOption? selectedLanguageItem;
+
+        public void SelectedLanguageItemChanged(LanguageOption? value)
+        {
+            if (value != null && value.Code != SelectedLanguage)
+            {
+                SelectedLanguage = value.Code;
+                I18nManager.Instance.Culture = new CultureInfo(SelectedLanguage);
+            }
+        }
+
+        // 支援的語系清單
+        public static List<LanguageOption> SupportedLanguages { get; } = new List<LanguageOption>
+        {
+            new LanguageOption { Code = "en", DisplayName = "English" },
+            new LanguageOption { Code = "zh-tw", DisplayName = "繁體中文" },
+            new LanguageOption { Code = "zh-cn", DisplayName = "简体中文" }
+        };
+
         public async Task LoadAsync()
         {
             if (!File.Exists(_configPath))
@@ -55,7 +83,18 @@ namespace CryptoWidget.ViewModels
                 await File.ReadAllTextAsync(_configPath));
 
             if (dto != null)
+            {
                 _mapper.Map(dto, this);
+
+                // 設定選中的語系項目
+                SelectedLanguageItem = SupportedLanguages.FirstOrDefault(l => l.Code == SelectedLanguage);
+
+                // 載入語系設定後，立即套用到應用程式
+                if (!string.IsNullOrEmpty(SelectedLanguage))
+                {
+                    I18nManager.Instance.Culture = new CultureInfo(SelectedLanguage);
+                }
+            }
         }
 
         public async Task SaveAsync()
