@@ -32,7 +32,7 @@ namespace CryptoWidget.ViewModels
             {
                 var assembly = Assembly.GetExecutingAssembly();
                 var descriptionAttribute = assembly.GetCustomAttribute<AssemblyDescriptionAttribute>();
-                return descriptionAttribute?.Description ?? "加密貨幣價格監控小工具";
+                return descriptionAttribute?.Description ?? "Cryptocurrency Price Monitoring Widget";
             }
         }
 

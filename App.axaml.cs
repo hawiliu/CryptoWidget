@@ -4,8 +4,11 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
 using CryptoWidget.ViewModels;
+using Lang.Avalonia;
+using Lang.Avalonia.Resx;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.Globalization;
 using System.Linq;
 
 namespace CryptoWidget
@@ -18,6 +21,13 @@ namespace CryptoWidget
 
         public override void Initialize()
         {
+            // 初始化Resx格式
+            I18nManager.Instance.Register(
+                plugin: new ResxLangPlugin(),  // 格式插件
+                defaultCulture: new CultureInfo("en"),  // 默认语言
+                error: out var error  // 错误信息（可选）
+            );
+
             AvaloniaXamlLoader.Load(this);
         }
 

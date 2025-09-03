@@ -1,6 +1,5 @@
 using Avalonia.Controls;
 using CryptoWidget.ViewModels;
-using System.ComponentModel;
 
 namespace CryptoWidget
 {
