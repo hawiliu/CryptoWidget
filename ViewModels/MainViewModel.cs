@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CryptoWidget.Services;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Timers;
@@ -26,7 +27,13 @@ namespace CryptoWidget.ViewModels
         public SettingViewModel Settings { get { return _settingViewModel; } }   // 供 XAML 綁定
 
         [ObservableProperty]
-        private string priceLines = "Loading...";
+        private ObservableCollection<PriceItem> priceItems = new() { new PriceItem() { Symbol = "Loading..." } };
+
+        [ObservableProperty]
+        private bool hasData = false;
+
+        [ObservableProperty]
+        private string statusStr = "Loading...";
 
         private readonly Timer _timer = new Timer(5000); // 每 5 秒更新
 
@@ -35,24 +42,49 @@ namespace CryptoWidget.ViewModels
             try
             {
                 var prices = await PriceService.GetCryptoPricesAsync(Settings.CryptoList.ToList(), Settings.SelectedExchange);
-                if (prices.Count == 0)
-                    PriceLines = "Empty";
-                else
-                    PriceLines = string.Join('\n', prices.Select(p =>
+                
+                // 建立現有項目的字典，以 Symbol 為鍵
+                var existingItems = PriceItems.ToDictionary(item => item.Symbol, item => item);
+                
+                // 處理每個價格項目
+                foreach (var price in prices)
+                {
+                    if (existingItems.TryGetValue(price.Key, out var existingItem))
                     {
-                        if (p.Value.HasValue)
+                        // 存在：更新價格
+                        existingItem.Price = price.Value.HasValue ? FormatPrice(price.Value.Value) : "Error";
+                    }
+                    else
+                    {
+                        // 不存在：新增項目
+                        var newItem = new PriceItem
                         {
-                            return $"{p.Key}:\t{p.Value.Value}";
-                        }
-                        else
-                        {
-                            return $"{p.Key}:\tError";
-                        }
-                    }));
+                            Symbol = price.Key,
+                            Price = price.Value.HasValue ? FormatPrice(price.Value.Value) : "Error",
+                            InputValue = ""
+                        };
+                        PriceItems.Add(newItem);
+                    }
+                }
+                
+                // 移除不再存在的項目
+                var currentSymbols = prices.Keys.ToHashSet();
+                var itemsToRemove = PriceItems.Where(item => !currentSymbols.Contains(item.Symbol)).ToList();
+                foreach (var item in itemsToRemove)
+                {
+                    PriceItems.Remove(item);
+                }
+                
+                // 更新資料狀態
+                HasData = PriceItems.Count > 0;
+                StatusStr = HasData ? "" : "Empty";
             }
             catch
             {
-                PriceLines = "Error";
+                // 發生錯誤時清空集合
+                PriceItems.Clear();
+                HasData = false;
+                StatusStr = "Error";
             }
         }
 
@@ -99,5 +131,20 @@ namespace CryptoWidget.ViewModels
             };
             _aboutWindow.Show();
         }
+    }
+
+    /// <summary>
+    /// 價格項目類別
+    /// </summary>
+    public partial class PriceItem : ObservableObject
+    {
+        [ObservableProperty]
+        private string symbol = string.Empty;
+
+        [ObservableProperty]
+        private string price = string.Empty;
+
+        [ObservableProperty]
+        private string inputValue = string.Empty;
     }
 }
