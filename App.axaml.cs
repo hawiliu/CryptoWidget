@@ -9,7 +9,9 @@ using Lang.Avalonia.Resx;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Globalization;
+using System.IO;
 using System.Linq;
+using System.Text.Json;
 
 namespace CryptoWidget
 {
@@ -22,9 +24,32 @@ namespace CryptoWidget
         public override void Initialize()
         {
             // 初始化Resx格式
+            var configPath = Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+                "CryptoWidget", "settings.json");
+
+            var defaultCulture = new CultureInfo("en");
+
+            if (File.Exists(configPath))
+            {
+                try
+                {
+                    var json = File.ReadAllText(configPath);
+                    var settingsDto = JsonSerializer.Deserialize<Services.Dto.SettingsDto>(json);
+                    if (settingsDto != null && !string.IsNullOrWhiteSpace(settingsDto.SelectedLanguage))
+                    {
+                        defaultCulture = new CultureInfo(settingsDto.SelectedLanguage);
+                    }
+                }
+                catch
+                {
+                    // Fallback to default
+                }
+            }
+
             I18nManager.Instance.Register(
                 plugin: new ResxLangPlugin(),  // 格式插件
-                defaultCulture: new CultureInfo("en"),  // 默认语言
+                defaultCulture: defaultCulture,  // 默认语言
                 error: out var error  // 错误信息（可选）
             );
 
