@@ -15,10 +15,13 @@
         Title="{c:I18n 'SettingsWindowTitle'}"
         Topmost="{Binding KeepOnTop}"
         CanResize="True"
-        ExtendClientAreaToDecorationsHint="True"
-        ExtendClientAreaChromeHints="NoChrome"
         ShowInTaskbar="False"
-        Opacity="{Binding OpacityLevel}">
+        Opacity="{Binding OpacityLevel}"
+        ExtendClientAreaChromeHints="NoChrome"
+        ExtendClientAreaTitleBarHeightHint="-1"
+        ExtendClientAreaToDecorationsHint="False"
+        SystemDecorations="None"
+        >
 
   <Border CornerRadius="10"
           Margin="10" Padding="10"

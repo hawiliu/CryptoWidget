@@ -12,10 +12,12 @@
         Topmost="{Binding KeepOnTop}"
         CanResize="False"
         WindowStartupLocation="CenterOwner"
-        ExtendClientAreaToDecorationsHint="True"
-        ExtendClientAreaChromeHints="NoChrome"
         ShowInTaskbar="False"
         Opacity="{Binding OpacityLevel}"
+        ExtendClientAreaChromeHints="NoChrome"
+        ExtendClientAreaTitleBarHeightHint="-1"
+        ExtendClientAreaToDecorationsHint="False"
+        SystemDecorations="None"
         >
 
   <Border CornerRadius="10"
