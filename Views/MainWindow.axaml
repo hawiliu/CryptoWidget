@@ -4,21 +4,26 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:c="https://codewf.com"
-        mc:Ignorable="d" d:DesignWidth="350" d:DesignHeight="100"
+        mc:Ignorable="d" d:DesignWidth="350" d:DesignHeight="200"
         x:Class="CryptoWidget.MainWindow"
         x:DataType="vm:MainViewModel"
         Icon="/Assets/cryptowidget-logo.ico"
         Title="{c:I18n 'MainWindowTitle'}"
-        Width="350" Height="100"
+        Width="350" Height="200"
         MinWidth="350" MaxWidth="300"
-        MinHeight="100"
+        MinHeight="200"
         CanResize="True"
         WindowStartupLocation="CenterScreen"
         Topmost="{Binding Settings.KeepOnTop}"
-        ExtendClientAreaToDecorationsHint="True"
-        ExtendClientAreaChromeHints="NoChrome"
         ShowInTaskbar="False"
         Opacity="{Binding Settings.OpacityLevel}"
+        BorderBrush="Transparent"
+        BorderThickness="0"
+        DragDrop.AllowDrop="True"
+        ExtendClientAreaChromeHints="NoChrome"
+        ExtendClientAreaTitleBarHeightHint="-1"
+        ExtendClientAreaToDecorationsHint="False"
+        SystemDecorations="None"
         >
   
     <Border Margin="10">
@@ -73,57 +78,63 @@
           Click="CloseButton_Click"/>
 
         <!-- 幣價列表或狀態文字 -->
-        <Grid Grid.Row="1">
-          <!-- 當有資料時顯示 ItemsControl -->
-          <ItemsControl ItemsSource="{Binding PriceItems}" 
-                        IsVisible="{Binding HasData}">
-            <ItemsControl.ItemTemplate>
-              <DataTemplate>
-                <Grid Margin="0,3">
-                  <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="120"/>
-                  </Grid.ColumnDefinitions>
-                  
-                  <!-- 交易對和價格 -->
-                  <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
-                    <TextBlock Text="{Binding Symbol}" Foreground="White" FontSize="16" FontWeight="Bold" Margin="0,0,8,0"/>
-                    <TextBlock Text="{Binding Price}" Foreground="LightGray" FontSize="14"/>
-                  </StackPanel>
-                  
-                  <!-- 輸入框 -->
-                  <TextBox Grid.Column="1" 
-                           Text="{Binding InputValue}" 
-                           Background="Transparent"
-                           Foreground="White"
-                           BorderBrush="Gray"
-                           BorderThickness="1"
-                           Padding="4,2"
-                           FontSize="12"
-                           VerticalContentAlignment="Center"
-                           HorizontalContentAlignment="Center">
-                    <TextBox.Styles>
-                      <Style Selector="TextBox:focus">
-                        <Style Selector="^ /template/ Border#PART_BorderElement">
-                          <Setter Property="BorderBrush" Value="Gray"/>
-                          <Setter Property="BorderThickness" Value="1"/>
-                        </Style>
-                      </Style>
-                    </TextBox.Styles>
-                  </TextBox>
-                </Grid>
-              </DataTemplate>
-            </ItemsControl.ItemTemplate>
-          </ItemsControl>
-          
-          <!-- 當沒有資料時顯示狀態文字 -->
-          <TextBlock Text="{Binding StatusStr}" 
-                     Foreground="White" 
-                     FontSize="18"
-                     HorizontalAlignment="Center"
-                     VerticalAlignment="Center"
-                     IsVisible="{Binding HasData, Converter={x:Static BoolConverters.Not}}"/>
-        </Grid>
+        <!-- 中間內容區域（可滾動） -->
+        <ScrollViewer Grid.Row="1" 
+                      VerticalScrollBarVisibility="Auto"
+                      HorizontalScrollBarVisibility="Disabled"
+                      Margin="0,0,10,0">
+            <StackPanel Spacing="10" Margin="0,0,0,0">
+              <!-- 當有資料時顯示 ItemsControl -->
+              <ItemsControl ItemsSource="{Binding PriceItems}" 
+                            IsVisible="{Binding HasData}">
+                <ItemsControl.ItemTemplate>
+                  <DataTemplate>
+                    <Grid Margin="0,3">
+                      <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="120"/>
+                      </Grid.ColumnDefinitions>
+                      
+                      <!-- 交易對和價格 -->
+                      <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                        <TextBlock Text="{Binding Symbol}" Foreground="White" FontSize="16" FontWeight="Bold" Margin="0,0,8,0"/>
+                        <TextBlock Text="{Binding Price}" Foreground="LightGray" FontSize="14"/>
+                      </StackPanel>
+                      
+                      <!-- 輸入框 -->
+                      <TextBox Grid.Column="1" 
+                              Text="{Binding InputValue}" 
+                              Background="Transparent"
+                              Foreground="White"
+                              BorderBrush="Gray"
+                              BorderThickness="1"
+                              Padding="4,2"
+                              FontSize="12"
+                              VerticalContentAlignment="Center"
+                              HorizontalContentAlignment="Center">
+                        <TextBox.Styles>
+                          <Style Selector="TextBox:focus">
+                            <Style Selector="^ /template/ Border#PART_BorderElement">
+                              <Setter Property="BorderBrush" Value="Gray"/>
+                              <Setter Property="BorderThickness" Value="1"/>
+                            </Style>
+                          </Style>
+                        </TextBox.Styles>
+                      </TextBox>
+                    </Grid>
+                  </DataTemplate>
+                </ItemsControl.ItemTemplate>
+              </ItemsControl>
+              
+              <!-- 當沒有資料時顯示狀態文字 -->
+              <TextBlock Text="{Binding StatusStr}" 
+                        Foreground="White" 
+                        FontSize="18"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        IsVisible="{Binding HasData, Converter={x:Static BoolConverters.Not}}"/>
+            </StackPanel>
+        </ScrollViewer>
       </Grid>
     </Border>
 
