@@ -1,10 +1,14 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CryptoWidget.Services;
+using Avalonia;
+using Avalonia.Controls;
+using Avalonia.Controls.ApplicationLifetimes;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Timers;
+using CryptoWidget.Services.Dto;
 
 namespace CryptoWidget.ViewModels
 {
@@ -15,6 +19,8 @@ namespace CryptoWidget.ViewModels
         public SettingsWindow? _settingWindow;
 
         public AboutWindow? _aboutWindow;
+
+        public ExchangePositionsWindow? _exchangePositionsWindow;
 
         public MainViewModel(SettingViewModel settingViewModel)
         {
@@ -41,7 +47,7 @@ namespace CryptoWidget.ViewModels
         {
             try
             {
-                var prices = await PriceService.GetCryptoPricesAsync(Settings.CryptoList.ToList(), Settings.SelectedExchange);
+                var prices = await ExchangeService.GetCryptoPricesAsync(Settings.CryptoList.ToList(), Settings.SelectedExchange);
                 
                 // 建立現有項目的字典，以 Symbol 為鍵
                 var existingItems = PriceItems.ToDictionary(item => item.Symbol, item => item);
@@ -53,6 +59,7 @@ namespace CryptoWidget.ViewModels
                     {
                         // 存在：更新價格
                         existingItem.Price = price.Value.HasValue ? FormatPrice(price.Value.Value) : "Error";
+                        existingItem.Push(price.Value.HasValue ? price.Value.Value : 0);
                     }
                     else
                     {
@@ -63,6 +70,7 @@ namespace CryptoWidget.ViewModels
                             Price = price.Value.HasValue ? FormatPrice(price.Value.Value) : "Error",
                             InputValue = ""
                         };
+                        newItem.Push(price.Value.HasValue ? price.Value.Value : 0);
                         PriceItems.Add(newItem);
                     }
                 }
@@ -115,36 +123,72 @@ namespace CryptoWidget.ViewModels
         [RelayCommand]
         private void OpenSettings()
         {
-            _settingWindow = new SettingsWindow(_settingViewModel)
+            if (_settingWindow is null || !_settingWindow.IsVisible)
             {
-                WindowStartupLocation = Avalonia.Controls.WindowStartupLocation.CenterOwner
-            };
-            _settingWindow.Show();
+                _settingWindow = new SettingsWindow(_settingViewModel)
+                {
+                    WindowStartupLocation = Avalonia.Controls.WindowStartupLocation.CenterOwner
+                };
+                _settingWindow.Closed += (_, __) => _settingWindow = null;
+                _settingWindow.Show();
+            }
+            else
+            {
+                _settingWindow.Activate();
+            }
         }
 
         [RelayCommand]
         private void OpenAbout()
         {
-            _aboutWindow = new AboutWindow(_settingViewModel)
+            if (_aboutWindow is null || !_aboutWindow.IsVisible)
             {
-                WindowStartupLocation = Avalonia.Controls.WindowStartupLocation.CenterOwner
-            };
-            _aboutWindow.Show();
+                _aboutWindow = new AboutWindow(_settingViewModel)
+                {
+                    WindowStartupLocation = Avalonia.Controls.WindowStartupLocation.CenterOwner
+                };
+                _aboutWindow.Closed += (_, __) => _aboutWindow = null;
+                _aboutWindow.Show();
+            }
+            else
+            {
+                _aboutWindow.Activate();
+            }
+        }
+
+        [RelayCommand]
+        private void OpenExchangePositions()
+        {
+            if (_exchangePositionsWindow is null || !_exchangePositionsWindow.IsVisible)
+            {
+                var mainWindow = (Application.Current?.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime)?.MainWindow;
+
+                _exchangePositionsWindow = new ExchangePositionsWindow(_settingViewModel);
+
+                if (mainWindow is not null)
+                {
+                    _exchangePositionsWindow.WindowStartupLocation = WindowStartupLocation.Manual;
+
+                    var leftX = mainWindow.Position.X;
+                    var belowY = mainWindow.Position.Y + (int)mainWindow.Bounds.Height;
+                    _exchangePositionsWindow.Position = new PixelPoint(leftX, belowY);
+
+                    _exchangePositionsWindow.Closed += (_, __) => _exchangePositionsWindow = null;
+                    _exchangePositionsWindow.Show(mainWindow);
+                }
+                else
+                {
+                    _exchangePositionsWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                    _exchangePositionsWindow.Closed += (_, __) => _exchangePositionsWindow = null;
+                    _exchangePositionsWindow.Show();
+                }
+            }
+            else
+            {
+                _exchangePositionsWindow.Activate();
+            }
         }
     }
 
-    /// <summary>
-    /// 價格項目類別
-    /// </summary>
-    public partial class PriceItem : ObservableObject
-    {
-        [ObservableProperty]
-        private string symbol = string.Empty;
 
-        [ObservableProperty]
-        private string price = string.Empty;
-
-        [ObservableProperty]
-        private string inputValue = string.Empty;
-    }
 }

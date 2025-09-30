@@ -44,6 +44,12 @@ namespace CryptoWidget.ViewModels
         private string selectedExchange = "binance";
 
         [ObservableProperty]
+        private string exchangeApiKey = string.Empty;
+
+        [ObservableProperty]
+        private string exchangeApiSecret = string.Empty;
+
+        [ObservableProperty]
         private ObservableCollection<string> cryptoList = new ObservableCollection<string>() { "BTC/USDT" };
 
         [ObservableProperty]

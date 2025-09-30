@@ -115,6 +115,15 @@ namespace CryptoWidget.i18n {
         }
         
         /// <summary>
+        ///   查詢類似 Positions 的當地語系化字串。
+        /// </summary>
+        public static string ExchangePositionsTitle {
+            get {
+                return ResourceManager.GetString("ExchangePositionsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查詢類似 CryptoWidget 的當地語系化字串。
         /// </summary>
         public static string MainWindowTitle {
@@ -156,6 +165,24 @@ namespace CryptoWidget.i18n {
         public static string Settings_CloseOption {
             get {
                 return ResourceManager.GetString("Settings_CloseOption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 Exchange API Key 的當地語系化字串。
+        /// </summary>
+        public static string Settings_ExchangeApiKeyLabel {
+            get {
+                return ResourceManager.GetString("Settings_ExchangeApiKeyLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 Exchange API Secret 的當地語系化字串。
+        /// </summary>
+        public static string Settings_ExchangeApiSecretLabel {
+            get {
+                return ResourceManager.GetString("Settings_ExchangeApiSecretLabel", resourceCulture);
             }
         }
         

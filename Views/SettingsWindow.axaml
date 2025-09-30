@@ -134,6 +134,26 @@
                       VerticalAlignment="Center"/>
           </Grid>
 
+          <!-- 交易所api Key -->
+          <Grid>
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="*"/>
+              <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0" Text="{c:I18n 'Settings_ExchangeApiKeyLabel'}" Foreground="White" FontSize="14" FontWeight="Bold" VerticalAlignment="Center"/>
+            <TextBox Grid.Column="1" Text="{Binding ExchangeApiKey}" Width="160" VerticalAlignment="Center" PasswordChar="*"/>
+          </Grid>
+
+          <!-- 交易所api Secret Key-->
+          <Grid>
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="*"/>
+              <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0" Text="{c:I18n 'Settings_ExchangeApiSecretLabel'}" Foreground="White" FontSize="14" FontWeight="Bold" VerticalAlignment="Center"/>
+            <TextBox Grid.Column="1" Text="{Binding ExchangeApiSecret}" Width="160" VerticalAlignment="Center" PasswordChar="*"/>
+          </Grid>
+
           <!-- 幣種輸入＋新增 -->
           <Grid>
             <Grid.RowDefinitions>

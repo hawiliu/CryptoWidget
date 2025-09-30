@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:c="https://codewf.com"
+        xmlns:local="clr-namespace:CryptoWidget.Services.Converter;assembly=CryptoWidget"
         mc:Ignorable="d" d:DesignWidth="350" d:DesignHeight="200"
         x:Class="CryptoWidget.MainWindow"
         x:DataType="vm:MainViewModel"
@@ -25,6 +26,9 @@
         ExtendClientAreaToDecorationsHint="False"
         SystemDecorations="None"
         >
+  <Window.Resources>
+    <local:HistoryToPointsConverter x:Key="HistoryToPointsConverter"/>
+  </Window.Resources>
   
     <Border Margin="10">
       <Grid>
@@ -37,7 +41,7 @@
         <Button Grid.Row="0"
           HorizontalAlignment="Right"
           VerticalAlignment="Center"
-          Margin="0,0,48,0"
+          Margin="0,0,72,0"
           Width="24" Height="24"
           Padding="0"
           Background="Transparent" BorderThickness="0"
@@ -52,7 +56,7 @@
         <Button Grid.Row="0"
           HorizontalAlignment="Right"
           VerticalAlignment="Center"
-          Margin="0,0,24,0"
+          Margin="0,0,48,0"
           Width="24" Height="24"
           Padding="0"
           Background="Transparent" BorderThickness="0"
@@ -63,6 +67,21 @@
           Content="&#xE115;"
           Command="{Binding OpenSettingsCommand}"/>
 
+        <!-- 交易所持倉按鈕 -->
+        <Button Grid.Row="0"
+          HorizontalAlignment="Right"
+          VerticalAlignment="Center"
+          Margin="0,0,24,0"
+          Width="24" Height="24"
+          Padding="0"
+          Background="Transparent" BorderThickness="0"
+          FontFamily="Segoe MDL2 Assets"
+          FontSize="14"
+          HorizontalContentAlignment="Center"
+          VerticalContentAlignment="Center"
+          Content="&#xEADF;"
+          Command="{Binding OpenExchangePositionsCommand}"/>
+        
         <!-- 關閉按鈕 -->
         <Button Grid.Row="0"
           HorizontalAlignment="Right"
@@ -92,7 +111,8 @@
                     <Grid Margin="0,3">
                       <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="120"/>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="80"/>
                       </Grid.ColumnDefinitions>
                       
                       <!-- 交易對和價格 -->
@@ -100,15 +120,31 @@
                         <TextBlock Text="{Binding Symbol}" Foreground="White" FontSize="16" FontWeight="Bold" Margin="0,0,8,0"/>
                         <TextBlock Text="{Binding Price}" Foreground="LightGray" FontSize="14"/>
                       </StackPanel>
+
+                      <!-- 右：迷你折線圖（隨容器縮放） -->
+                      <Border Grid.Column="1" Background="#202020" CornerRadius="6" Padding="6" Height="44" Margin="5,0,5,0">
+                        <!-- 用 Viewbox 讓內部 100x40 的座標自動等比放大 -->
+                        <Viewbox Stretch="Fill">
+                          <Grid Width="50" Height="40">
+                            <!-- X 軸淡線（可選） -->
+                            <Rectangle Height="1" VerticalAlignment="Center" Fill="#404040"/>
+                            <!-- 折線 -->
+                            <Polyline
+                              Points="{Binding History, Converter={StaticResource HistoryToPointsConverter}}"
+                              Stroke="#66FFFFFF" StrokeThickness="2" />
+                          </Grid>
+                        </Viewbox>
+                      </Border>
                       
                       <!-- 輸入框 -->
-                      <TextBox Grid.Column="1" 
+                      <TextBox Grid.Column="2" 
                               Text="{Binding InputValue}" 
                               Background="Transparent"
                               Foreground="White"
                               BorderBrush="Gray"
                               BorderThickness="1"
                               Padding="4,2"
+                              Margin="0,0,10,0"
                               FontSize="12"
                               VerticalContentAlignment="Center"
                               HorizontalContentAlignment="Center">

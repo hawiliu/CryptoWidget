@@ -196,4 +196,13 @@
   <data name="Description" xml:space="preserve">
     <value>加密货币价格监控小工具</value>
   </data>
+  <data name="Settings_ExchangeApiKeyLabel" xml:space="preserve">
+    <value>交易所API Key</value>
+  </data>
+  <data name="ExchangePositionsTitle" xml:space="preserve">
+    <value>仓位</value>
+  </data>
+  <data name="Settings_ExchangeApiSecretLabel" xml:space="preserve">
+    <value>交易所API Secret</value>
+  </data>
 </root>

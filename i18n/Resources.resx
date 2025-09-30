@@ -140,6 +140,14 @@
     <value>Exchange</value>
     <comment>Exchange Label</comment>
   </data>
+  <data name="Settings_ExchangeApiKeyLabel" xml:space="preserve">
+    <value>Exchange API Key</value>
+    <comment>Exchange API Key Label</comment>
+  </data>
+  <data name="Settings_ExchangeApiSecretLabel" xml:space="preserve">
+    <value>Exchange API Secret</value>
+    <comment>Exchange API Secret Label</comment>
+  </data>
   <data name="Settings_AddCryptoLabel" xml:space="preserve">
     <value>Add Crypto</value>
     <comment>Add Crypto Label</comment>
@@ -196,5 +204,9 @@
   <data name="Description" xml:space="preserve">
     <value>Cryptocurrency Price Monitoring Widget</value>
     <comment>Description</comment>
+  </data>
+  <data name="ExchangePositionsTitle" xml:space="preserve">
+    <value>Positions</value>
+    <comment>Exchange Positions</comment>
   </data>
 </root>

@@ -1,0 +1,96 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:CryptoWidget.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:c="https://codewf.com"
+        mc:Ignorable="d" d:DesignWidth="350" d:DesignHeight="100"
+        x:Class="CryptoWidget.ExchangePositionsWindow"
+        x:DataType="vm:ExchangePositionsViewModel"
+        Icon="/Assets/cryptowidget-logo.ico"
+        Title="{c:I18n 'ExchangePositionsWindowTitle'}"
+        Width="350" Height="100"
+        MinWidth="350" MaxWidth="350"
+        MinHeight="100"
+        CanResize="True"
+        WindowStartupLocation="CenterScreen"
+        Topmost="{Binding Settings.KeepOnTop}"
+        ExtendClientAreaToDecorationsHint="True"
+        ExtendClientAreaChromeHints="NoChrome"
+        ShowInTaskbar="False"
+        Opacity="{Binding Settings.OpacityLevel}"
+        >
+  
+    <Border Margin="10">
+      <Grid>
+        <Grid.RowDefinitions>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- 標題 -->
+        <TextBlock Grid.Row="0"
+                   VerticalAlignment="Center"
+                   Text="{c:I18n 'ExchangePositionsTitle'}" Foreground="White" FontSize="18" FontWeight="Bold"/>
+
+        <!-- 關閉按鈕 -->
+        <Button Grid.Row="0"
+          HorizontalAlignment="Right"
+          VerticalAlignment="Center"
+          Width="24" Height="24"
+          Padding="0"
+          Background="Transparent" BorderThickness="0"
+          FontFamily="Segoe MDL2 Assets"
+          FontSize="16"
+          HorizontalContentAlignment="Center"
+          VerticalContentAlignment="Center"
+          Content="&#xE10A;"
+          Click="CloseButton_Click"/>
+
+        <!-- 幣價列表或狀態文字 -->
+        <Grid Grid.Row="1">
+          <!-- 當有資料時顯示 ItemsControl -->
+          <ItemsControl ItemsSource="{Binding Positions}"
+                        IsVisible="{Binding HasPosition}">
+            <ItemsControl.Styles>
+              <Style Selector="TextBlock.profit">
+                <Setter Property="Foreground" Value="#00C853"/>
+              </Style>
+              <Style Selector="TextBlock.loss">
+                <Setter Property="Foreground" Value="#FF5252"/>
+              </Style>
+            </ItemsControl.Styles>
+            <ItemsControl.ItemTemplate>
+              <DataTemplate>
+                <Grid Margin="0,3">
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="120"/>
+                  </Grid.ColumnDefinitions>
+
+                  <!-- 交易對, 方向, 盈虧 -->
+                  <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                    <TextBlock Text="{Binding Symbol}" Foreground="White" FontSize="16" FontWeight="Bold" Margin="0,0,8,0"/>
+                    <TextBlock Text="{Binding Side}" Foreground="White" FontSize="16" Margin="0,0,8,0"/>
+                    <TextBlock Text="{Binding UnrealizedPnl, StringFormat='{}{0:F2}'}" FontSize="14"
+                               Classes.profit="{Binding IsInProfit}"
+                               Classes.loss="{Binding IsInLoss}"/>
+                  </StackPanel>
+                </Grid>
+              </DataTemplate>
+            </ItemsControl.ItemTemplate>
+          </ItemsControl>
+
+          
+          <!-- 當沒有 API Key 且沒有持倉時顯示狀態文字 -->
+          <TextBlock Text="{Binding StatusStr}"
+                     Foreground="White"
+                     FontSize="18"
+                     HorizontalAlignment="Center"
+                     VerticalAlignment="Center"
+                     IsVisible="{Binding ShowStatus}"/>
+        </Grid>
+      </Grid>
+    </Border>
+
+</Window>
