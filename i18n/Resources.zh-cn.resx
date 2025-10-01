@@ -217,4 +217,25 @@
   <data name="Settings_ExchangeApiSecretLabel" xml:space="preserve">
     <value>交易所API Secret</value>
   </data>
+  <data name="Settings_Tab_Appearance" xml:space="preserve">
+    <value>外观</value>
+  </data>
+  <data name="Settings_Tab_Exchange" xml:space="preserve">
+    <value>交易所</value>
+  </data>
+  <data name="Settings_Tab_General" xml:space="preserve">
+    <value>一般</value>
+  </data>
+  <data name="Settings_ShowChartLabel" xml:space="preserve">
+    <value>显示折线图</value>
+  </data>
+  <data name="Settings_ShowTemporaryInputLabel" xml:space="preserve">
+    <value>显示临时输入框</value>
+  </data>
+  <data name="Settings_PriceFontSizeLabel" xml:space="preserve">
+    <value>价格字号大小</value>
+  </data>
+  <data name="Settings_SymbolFontSizeLabel" xml:space="preserve">
+    <value>币种文字大小</value>
+  </data>
 </root>

@@ -125,7 +125,7 @@
     <comment>Keep on Top Label</comment>
   </data>
   <data name="Settings_CloseBehaviorLabel" xml:space="preserve">
-    <value>When clicking close button</value>
+    <value>When clicking close</value>
     <comment>Close Behavior Label</comment>
   </data>
   <data name="Settings_HideOption" xml:space="preserve">
@@ -220,5 +220,28 @@
   <data name="ExchangePositionsTitle" xml:space="preserve">
     <value>Positions</value>
     <comment>Exchange Positions</comment>
+  </data>
+  <data name="Settings_Tab_Appearance" xml:space="preserve">
+    <value>Appearance</value>
+  </data>
+  <data name="Settings_Tab_Exchange" xml:space="preserve">
+    <value>Exchange</value>
+  </data>
+  <data name="Settings_Tab_General" xml:space="preserve">
+    <value>General</value>
+  </data>
+  <data name="Settings_ShowChartLabel" xml:space="preserve">
+    <value>Show Chart</value>
+    <comment>Show Chart Label</comment>
+  </data>
+  <data name="Settings_ShowTemporaryInputLabel" xml:space="preserve">
+    <value>Show Temporary Input</value>
+    <comment>Show Temporary Input Label</comment>
+  </data>
+  <data name="Settings_PriceFontSizeLabel" xml:space="preserve">
+    <value>Price Font Size</value>
+  </data>
+  <data name="Settings_SymbolFontSizeLabel" xml:space="preserve">
+    <value>Symbol Font Size</value>
   </data>
 </root>

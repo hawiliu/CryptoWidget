@@ -12,7 +12,7 @@ namespace CryptoWidget.Services.Converter
     {
         // 目標畫布是 50x40（Viewbox 會自動縮放）
         const double W = 50.0;
-        const double H = 40.0;
+        const double H = 26.0;
         public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
         {
             if (value is IEnumerable<double> seq)

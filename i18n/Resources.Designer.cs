@@ -385,5 +385,37 @@ namespace CryptoWidget.i18n {
                 return ResourceManager.GetString("Status_Error", resourceCulture);
             }
         }
+
+        public static string Settings_Tab_Appearance
+        {
+            get
+            {
+                return ResourceManager.GetString("Settings_Tab_Appearance", resourceCulture);
+            }
+        }
+
+        public static string Settings_Tab_Exchange
+        {
+            get
+            {
+                return ResourceManager.GetString("Settings_Tab_Exchange", resourceCulture);
+            }
+        }
+
+        public static string Settings_Tab_General
+        {
+            get
+            {
+                return ResourceManager.GetString("Settings_Tab_General", resourceCulture);
+            }
+        }
+
+        public static string Settings_ShowChartLabel
+        {
+            get
+            {
+                return ResourceManager.GetString("Settings_ShowChartLabel", resourceCulture);
+            }
+        }
     }
 }

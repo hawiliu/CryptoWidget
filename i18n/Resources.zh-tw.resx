@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -216,5 +216,26 @@
   </data>
   <data name="Settings_ExchangeApiSecretLabel" xml:space="preserve">
     <value>交易所API Secret</value>
+  </data>
+  <data name="Settings_Tab_Appearance" xml:space="preserve">
+    <value>外觀</value>
+  </data>
+  <data name="Settings_Tab_Exchange" xml:space="preserve">
+    <value>交易所</value>
+  </data>
+  <data name="Settings_Tab_General" xml:space="preserve">
+    <value>一般</value>
+  </data>
+  <data name="Settings_ShowChartLabel" xml:space="preserve">
+    <value>顯示折線圖</value>
+  </data>
+  <data name="Settings_ShowTemporaryInputLabel" xml:space="preserve">
+    <value>顯示臨時輸入框</value>
+  </data>
+  <data name="Settings_PriceFontSizeLabel" xml:space="preserve">
+    <value>價格文字大小</value>
+  </data>
+  <data name="Settings_SymbolFontSizeLabel" xml:space="preserve">
+    <value>幣種文字大小</value>
   </data>
 </root>

@@ -1,4 +1,4 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CryptoWidget.Services;
 using Avalonia;
@@ -48,10 +48,10 @@ namespace CryptoWidget.ViewModels
             try
             {
                 var prices = await ExchangeService.GetCryptoPricesAsync(Settings.CryptoList.ToList(), Settings.SelectedExchange);
-                
+
                 // 建立現有項目的字典，以 Symbol 為鍵
                 var existingItems = PriceItems.ToDictionary(item => item.Symbol, item => item);
-                
+
                 // 處理每個價格項目
                 foreach (var price in prices)
                 {
@@ -74,7 +74,7 @@ namespace CryptoWidget.ViewModels
                         PriceItems.Add(newItem);
                     }
                 }
-                
+
                 // 移除不再存在的項目
                 var currentSymbols = prices.Keys.ToHashSet();
                 var itemsToRemove = PriceItems.Where(item => !currentSymbols.Contains(item.Symbol)).ToList();
@@ -82,7 +82,23 @@ namespace CryptoWidget.ViewModels
                 {
                     PriceItems.Remove(item);
                 }
-                
+
+                // 根據設定檔中的順序重新排序
+                var orderedSymbols = Settings.CryptoList.ToList();
+                for (int i = 0; i < orderedSymbols.Count; i++)
+                {
+                    var symbol = orderedSymbols[i];
+                    var item = PriceItems.FirstOrDefault(p => p.Symbol == symbol);
+                    if (item != null)
+                    {
+                        var currentIndex = PriceItems.IndexOf(item);
+                        if (currentIndex != i)
+                        {
+                            PriceItems.Move(currentIndex, i);
+                        }
+                    }
+                }
+
                 // 更新資料狀態
                 HasData = PriceItems.Count > 0;
                 StatusStr = HasData ? "" : "Empty";
@@ -93,30 +109,6 @@ namespace CryptoWidget.ViewModels
                 PriceItems.Clear();
                 HasData = false;
                 StatusStr = "Error";
-            }
-        }
-
-        private string FormatPrice(double price)
-        {
-            if (price >= 1.0)
-            {
-                return price.ToString("F2");
-            }
-            else if (price >= 0.01)
-            {
-                return price.ToString("F4");
-            }
-            else if (price >= 0.0001)
-            {
-                return price.ToString("F6");
-            }
-            else if (price >= 0.000001)
-            {
-                return price.ToString("F8");
-            }
-            else
-            {
-                return price.ToString("F10");
             }
         }
 

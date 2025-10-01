@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 namespace CryptoWidget.Services.Dto
 {
@@ -9,6 +9,14 @@ namespace CryptoWidget.Services.Dto
         public bool KeepOnTop { get; set; }
 
         public bool CloseOnExit { get; set; }
+
+        public bool ShowChart { get; set; }
+
+        public bool ShowTemporaryInput { get; set; }
+
+        public double SymbolFontSize { get; set; } = 16;
+
+        public double PriceFontSize { get; set; } = 14;
 
         public string SelectedExchange { get; set; } = "binance";
 

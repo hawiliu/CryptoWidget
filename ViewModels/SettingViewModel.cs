@@ -28,33 +28,7 @@ namespace CryptoWidget.ViewModels
                     "CryptoWidget", "settings.json");
         }
 
-        [ObservableProperty]
-        private double opacityLevel = 0.8;
-
-        [ObservableProperty]
-        private bool keepOnTop = false;
-
-        [ObservableProperty]
-        private bool closeOnExit = false;
-
-        // 支援的交易所清單
-        public static List<string> SupportedExchanges { get { return ExchangeUtil.GetExchanges(); } }
-
-        [ObservableProperty]
-        private string selectedExchange = "binance";
-
-        [ObservableProperty]
-        private string exchangeApiKey = string.Empty;
-
-        [ObservableProperty]
-        private string exchangeApiSecret = string.Empty;
-
-        [ObservableProperty]
-        private ObservableCollection<string> cryptoList = new ObservableCollection<string>() { "BTC/USDT" };
-
-        [ObservableProperty]
-        private string newCryptoSymbol = string.Empty;
-
+        // -- 一般設定 --
         // 語系選擇
         [ObservableProperty]
         private string selectedLanguage = "en";
@@ -79,6 +53,47 @@ namespace CryptoWidget.ViewModels
             new LanguageOption { Code = "zh-tw", DisplayName = "繁體中文" },
             new LanguageOption { Code = "zh-cn", DisplayName = "简体中文" }
         };
+
+        [ObservableProperty]
+        private bool keepOnTop = false;
+
+        [ObservableProperty]
+        private bool closeOnExit = false;
+
+        // -- 交易所設定 --
+        // 支援的交易所清單
+        public static List<string> SupportedExchanges { get { return ExchangeUtil.GetExchanges(); } }
+
+        [ObservableProperty]
+        private string selectedExchange = "binance";
+
+        [ObservableProperty]
+        private string exchangeApiKey = string.Empty;
+
+        [ObservableProperty]
+        private string exchangeApiSecret = string.Empty;
+
+        [ObservableProperty]
+        private ObservableCollection<string> cryptoList = new ObservableCollection<string>() { "BTC/USDT" };
+
+        [ObservableProperty]
+        private string newCryptoSymbol = string.Empty;
+
+        // -- 外觀設定 --
+        [ObservableProperty]
+        private double opacityLevel = 0.8;
+
+        [ObservableProperty]
+        private bool showChart = true;
+
+        [ObservableProperty]
+        private bool showTemporaryInput = true;
+
+        [ObservableProperty]
+        private double symbolFontSize = 16;
+
+        [ObservableProperty]
+        private double priceFontSize = 14;
 
         public async Task LoadAsync()
         {
@@ -129,6 +144,28 @@ namespace CryptoWidget.ViewModels
         private void RemoveCrypto(string symbol)
         {
             if (symbol is not null) CryptoList.Remove(symbol);
+        }
+
+        [RelayCommand]
+        private void MoveUp(string symbol)
+        {
+            if (symbol is null) return;
+            var index = CryptoList.IndexOf(symbol);
+            if (index > 0)
+            {
+                CryptoList.Move(index, index - 1);
+            }
+        }
+
+        [RelayCommand]
+        private void MoveDown(string symbol)
+        { 
+            if (symbol is null) return;
+            var index = CryptoList.IndexOf(symbol);
+            if (index < CryptoList.Count - 1 && index != -1)
+            {
+                CryptoList.Move(index, index + 1);
+            }
         }
     }
 }
