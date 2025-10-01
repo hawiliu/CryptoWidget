@@ -172,6 +172,18 @@
   </data>
   <!-- 錯誤和提示訊息 -->
   <!-- 狀態訊息 -->
+  <data name="Status_ApiKeyIsEmpty" xml:space="preserve">
+    <value>API金鑰為空。</value>
+  </data>
+  <data name="Status_Error" xml:space="preserve">
+    <value>錯誤</value>
+  </data>
+  <data name="Status_Loading" xml:space="preserve">
+    <value>載入中...</value>
+  </data>
+  <data name="Status_NoPositions" xml:space="preserve">
+    <value>沒有倉位</value>
+  </data>
   <!-- 工具提示 -->
   <data name="Tooltip_Settings" xml:space="preserve">
     <value>設定</value>

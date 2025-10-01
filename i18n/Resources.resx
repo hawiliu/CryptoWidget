@@ -180,6 +180,18 @@
   </data>
   <!-- Error and Information Messages -->
   <!-- Status Messages -->
+  <data name="Status_ApiKeyIsEmpty" xml:space="preserve">
+    <value>API Key is empty.</value>
+  </data>
+  <data name="Status_Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="Status_Loading" xml:space="preserve">
+    <value>Loading...</value>
+  </data>
+  <data name="Status_NoPositions" xml:space="preserve">
+    <value>No positions</value>
+  </data>
   <!-- Tooltips -->
   <data name="Tooltip_Settings" xml:space="preserve">
     <value>Settings</value>

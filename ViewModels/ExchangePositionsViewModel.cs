@@ -20,7 +20,7 @@ namespace CryptoWidget.ViewModels
             _settingViewModel = settingViewModel;
             if (settingViewModel != null && string.IsNullOrEmpty(settingViewModel.ExchangeApiKey))
             {
-                StatusStr = "API Key is empty.";
+                StatusStr = i18n.Resources.Status_ApiKeyIsEmpty;
             }
             else
             {
@@ -40,9 +40,9 @@ namespace CryptoWidget.ViewModels
         private bool hasPosition = false;
 
         [ObservableProperty]
-        private string statusStr = "Loading...";
+        private string statusStr = i18n.Resources.Status_Loading;
 
-        public bool ShowStatus => !HasApiKey && !HasPosition;
+        public bool ShowStatus => !HasApiKey || !HasPosition;
 
         [ObservableProperty]
         private ObservableCollection<PositionItem> positions = new ObservableCollection<PositionItem>();
@@ -65,11 +65,11 @@ namespace CryptoWidget.ViewModels
                 var apiSecret = Settings.ExchangeApiSecret;
                 var exchange = Settings.SelectedExchange;
 
-                if (string.IsNullOrWhiteSpace(apiKey))
+                if (string.IsNullOrWhiteSpace(apiKey) || string.IsNullOrEmpty(apiSecret))
                 {
                     HasApiKey = false;
                     HasPosition = false;
-                    StatusStr = "API Key is empty.";
+                    StatusStr = i18n.Resources.Status_ApiKeyIsEmpty;
                     return;
                 }
 
@@ -103,14 +103,14 @@ namespace CryptoWidget.ViewModels
                     Positions.Remove(item);
                 }
 
-                HasPosition = positions != null && positions.Count > 0;
-                StatusStr = HasPosition ? string.Empty : "No positions";
+                HasPosition = Positions != null && Positions.Count > 0;
+                StatusStr = HasPosition ? string.Empty : i18n.Resources.Status_NoPositions;
             }
             catch
             {
                 Positions.Clear();
                 HasPosition = false;
-                StatusStr = "Error";
+                StatusStr = i18n.Resources.Status_Error;
             }
         }
     }

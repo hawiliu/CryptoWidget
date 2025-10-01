@@ -27,6 +27,9 @@ namespace CryptoWidget.Services
                 _currentExchangeName = exchangeName;
                 _currentApiKey = null;
                 _currentApiSecret = null;
+
+                // 嘗試呼叫統一 API 取得持倉（不同交易所支援度不同）
+                exchange.LoadMarkets().Wait();
             }
 
             return _sharedExchange;
@@ -48,9 +51,24 @@ namespace CryptoWidget.Services
             return exchange;
         }
 
-        public static async Task<Dictionary<string, double?>> GetCryptoPricesAsync(List<string> symbols, string exchangeName = "binance")
+        private static string ConvertSymbol(string symbol, bool isContract)
         {
-            var prices = new Dictionary<string, double?>();
+            if (symbol.Contains("/"))
+                return symbol;
+
+            string baseSymblol = symbol[..^5];
+            string quote = symbol[^4..];
+
+            if (isContract)
+                return $"{baseSymblol}/{quote}:{quote}";
+            else
+                return $"{baseSymblol}/{quote}";
+
+        }
+
+        public static async Task<Dictionary<string, decimal?>> GetCryptoPricesAsync(List<string> symbols, string exchangeName = "binance")
+        {
+            var prices = new Dictionary<string, decimal?>();
             if (symbols == null || symbols.Count == 0)
                 return prices;
 
@@ -60,29 +78,17 @@ namespace CryptoWidget.Services
 
                 foreach (var symbol in symbols)
                 {
-                    double? price = null;
+                    decimal? price = null;
 
                     bool isContractFormat = symbol.Contains(":USDT");
-                    bool isSpotFormat = symbol.Contains("/USDT");
 
                     if (isContractFormat)
                     {
                         price = await TryGetPriceAsync(exchange, symbol, true);
-                        if (price == null)
-                        {
-                            string spotSymbol = symbol.Replace(":", "/");
-                            price = await TryGetPriceAsync(exchange, spotSymbol, false);
-                        }
                     }
                     else
                     {
-                        string spotSymbol = isSpotFormat ? symbol : $"{symbol}/USDT";
-                        price = await TryGetPriceAsync(exchange, spotSymbol, false);
-                        if (price == null)
-                        {
-                            string contractSymbol = symbol.Replace("/", ":");
-                            price = await TryGetPriceAsync(exchange, contractSymbol, true);
-                        }
+                        price = await TryGetPriceAsync(exchange, symbol, false);
                     }
 
                     prices[symbol] = price;
@@ -99,16 +105,16 @@ namespace CryptoWidget.Services
             return prices;
         }
 
-        private static async Task<double?> TryGetPriceAsync(Exchange exchange, string symbol, bool isContract)
+        private static async Task<decimal?> TryGetPriceAsync(Exchange exchange, string symbol, bool isContract)
         {
             try
             {
-                exchange.options["defaultType"] = isContract ? "swap" : "spot";
-
-                var ticker = await exchange.FetchTicker(symbol);
+                exchange.options["defaultType"] = isContract ? "future" : "spot";
+                string ccxtSymbol = ConvertSymbol(symbol, isContract);
+                var ticker = await exchange.FetchTicker(ccxtSymbol);
                 if (ticker.last.HasValue && ticker.last.Value > 0)
                 {
-                    return ticker.last.Value;
+                    return decimal.Parse((string)exchange.priceToPrecision(ccxtSymbol, ticker.last.Value));
                 }
             }
             catch (Exception)
@@ -132,9 +138,6 @@ namespace CryptoWidget.Services
 
             try
             {
-                // 嘗試呼叫統一 API 取得持倉（不同交易所支援度不同）
-                await exchange.LoadMarkets();
-
                 List<Position> positions = await exchange.FetchPositions();
 
                 foreach (Position p in positions)

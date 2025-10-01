@@ -58,8 +58,8 @@ namespace CryptoWidget.ViewModels
                     if (existingItems.TryGetValue(price.Key, out var existingItem))
                     {
                         // 存在：更新價格
-                        existingItem.Price = price.Value.HasValue ? FormatPrice(price.Value.Value) : "Error";
-                        existingItem.Push(price.Value.HasValue ? price.Value.Value : 0);
+                        existingItem.Price = price.Value.HasValue ? price.Value.Value.ToString() : "Error";
+                        existingItem.Push((double)(price.Value.HasValue ? price.Value.Value : 0));
                     }
                     else
                     {
@@ -67,10 +67,10 @@ namespace CryptoWidget.ViewModels
                         var newItem = new PriceItem
                         {
                             Symbol = price.Key,
-                            Price = price.Value.HasValue ? FormatPrice(price.Value.Value) : "Error",
+                            Price = price.Value.HasValue ? price.Value.Value.ToString() : "Error",
                             InputValue = ""
                         };
-                        newItem.Push(price.Value.HasValue ? price.Value.Value : 0);
+                        newItem.Push((double)(price.Value.HasValue ? price.Value.Value : 0));
                         PriceItems.Add(newItem);
                     }
                 }
