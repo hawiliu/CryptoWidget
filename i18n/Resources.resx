@@ -206,8 +206,12 @@
     <comment>Close Button Tooltip</comment>
   </data>
   <data name="Tooltip_ShowMainWindow" xml:space="preserve">
-    <value>Show Main Window</value>
-    <comment>Show Main Window Menu Item</comment>
+    <value>Main Window</value>
+    <comment>Main Window Tooltip</comment>
+  </data>
+  <data name="Tooltip_Positions" xml:space="preserve">
+    <value>Positions</value>
+    <comment>Show Positions Tooltip</comment>
   </data>
   <data name="Settings_LanguageLabel" xml:space="preserve">
     <value>Language</value>

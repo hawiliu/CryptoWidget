@@ -198,8 +198,12 @@
     <comment>关闭按钮工具提示</comment>
   </data>
   <data name="Tooltip_ShowMainWindow" xml:space="preserve">
-    <value>显示主窗口</value>
-    <comment>显示主窗口菜单项目</comment>
+    <value>主窗口</value>
+    <comment>主窗口按钮工具提示</comment>
+  </data>
+  <data name="Tooltip_Positions" xml:space="preserve">
+    <value>仓位</value>
+    <comment>仓位按钮工具提示</comment>
   </data>
   <data name="Settings_LanguageLabel" xml:space="preserve">
     <value>语言</value>

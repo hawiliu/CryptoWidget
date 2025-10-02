@@ -1,4 +1,4 @@
-﻿using ccxt;
+using ccxt;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CryptoWidget.Services;
 using CryptoWidget.Services.Dto;
@@ -102,6 +102,9 @@ namespace CryptoWidget.ViewModels
                 {
                     Positions.Remove(item);
                 }
+
+                // 依照 UnrealizedPnl 進行排序 (由大到小)
+                Positions = new ObservableCollection<PositionItem>(Positions.OrderByDescending(p => p.UnrealizedPnl));
 
                 HasPosition = Positions != null && Positions.Count > 0;
                 StatusStr = HasPosition ? string.Empty : i18n.Resources.Status_NoPositions;

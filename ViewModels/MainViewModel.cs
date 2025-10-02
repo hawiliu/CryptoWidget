@@ -157,7 +157,7 @@ namespace CryptoWidget.ViewModels
 
                 _exchangePositionsWindow = new ExchangePositionsWindow(_settingViewModel);
 
-                if (mainWindow is not null)
+                if (mainWindow is not null && mainWindow.IsVisible)
                 {
                     _exchangePositionsWindow.WindowStartupLocation = WindowStartupLocation.Manual;
 

@@ -34,7 +34,7 @@ namespace CryptoWidget.Services.Dto
         [ObservableProperty]
         private ObservableCollection<double> history = new ObservableCollection<double>();
 
-        public void Push(double newPrice, int maxPoints = 50)
+        public void Push(double newPrice, int maxPoints = 100)
         {
             History.Add(newPrice);
             while (History.Count > maxPoints)

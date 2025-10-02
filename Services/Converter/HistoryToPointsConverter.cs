@@ -10,8 +10,8 @@ namespace CryptoWidget.Services.Converter
 {
     public class HistoryToPointsConverter : IValueConverter
     {
-        // 目標畫布是 50x40（Viewbox 會自動縮放）
-        const double W = 50.0;
+        // 目標畫布是 100x40（Viewbox 會自動縮放）
+        const double W = 100.0;
         const double H = 26.0;
         public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
         {

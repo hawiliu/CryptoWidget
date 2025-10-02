@@ -124,9 +124,9 @@
 
                       <!-- 右：迷你折線圖（隨容器縮放） -->
                       <Border Grid.Column="1" Background="#202020" CornerRadius="6" Padding="6" Height="30" Margin="5,0,5,0" IsVisible="{Binding $parent[ItemsControl].DataContext.Settings.ShowChart}">
-                        <!-- 用 Viewbox 讓內部 50x26 的座標自動等比放大 -->
+                        <!-- 用 Viewbox 讓內部 100x26 的座標自動等比放大 -->
                         <Viewbox Stretch="Fill">
-                          <Grid Width="50" Height="26">
+                          <Grid Width="100" Height="26">
                             <!-- X 軸淡線（可選） -->
                             <Rectangle Height="1" VerticalAlignment="Center" Fill="#404040"/>
                             <!-- 折線 -->
