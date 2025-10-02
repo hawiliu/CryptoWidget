@@ -8,9 +8,9 @@
     <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
     
     <!-- 版本資訊 -->
-    <Version>1.0.6</Version>
-    <AssemblyVersion>1.0.6.2</AssemblyVersion>
-    <FileVersion>1.0.6.2</FileVersion>
+    <Version>1.0.7</Version>
+    <AssemblyVersion>1.0.7.0</AssemblyVersion>
+    <FileVersion>1.0.7.0</FileVersion>
     <Company>Hawiliu</Company>
     <Product>CryptoWidget</Product>
     <Description>Cryptocurrency Price Monitoring Widget</Description>

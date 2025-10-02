@@ -35,13 +35,6 @@ namespace CryptoWidget
             };
         }
 
-        private void RemoveCrypto_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
-        {
-            if (sender is Button button && button.Tag is string symbol && DataContext is SettingViewModel settings)
-            {
-                settings.RemoveCryptoCommand.Execute(symbol);
-            }
-        }
 
         private async void SaveButton_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
         {

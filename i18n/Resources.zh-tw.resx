@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -172,6 +172,18 @@
   </data>
   <!-- 錯誤和提示訊息 -->
   <!-- 狀態訊息 -->
+  <data name="Status_ApiKeyIsEmpty" xml:space="preserve">
+    <value>API金鑰為空。</value>
+  </data>
+  <data name="Status_Error" xml:space="preserve">
+    <value>錯誤</value>
+  </data>
+  <data name="Status_Loading" xml:space="preserve">
+    <value>載入中...</value>
+  </data>
+  <data name="Status_NoPositions" xml:space="preserve">
+    <value>沒有倉位</value>
+  </data>
   <!-- 工具提示 -->
   <data name="Tooltip_Settings" xml:space="preserve">
     <value>設定</value>
@@ -186,8 +198,12 @@
     <comment>關閉按鈕工具提示</comment>
   </data>
   <data name="Tooltip_ShowMainWindow" xml:space="preserve">
-    <value>顯示主視窗</value>
-    <comment>顯示主視窗選單項目</comment>
+    <value>主視窗</value>
+    <comment>主視窗工具提示</comment>
+  </data>
+  <data name="Tooltip_Positions" xml:space="preserve">
+    <value>倉位</value>
+    <comment>倉位工具提示</comment>
   </data>
   <data name="Settings_LanguageLabel" xml:space="preserve">
     <value>語言</value>
@@ -195,5 +211,35 @@
   </data>
   <data name="Description" xml:space="preserve">
     <value>加密貨幣價格監控小工具</value>
+  </data>
+  <data name="Settings_ExchangeApiKeyLabel" xml:space="preserve">
+    <value>交易所API Key</value>
+  </data>
+  <data name="ExchangePositionsTitle" xml:space="preserve">
+    <value>倉位</value>
+  </data>
+  <data name="Settings_ExchangeApiSecretLabel" xml:space="preserve">
+    <value>交易所API Secret</value>
+  </data>
+  <data name="Settings_Tab_Appearance" xml:space="preserve">
+    <value>外觀</value>
+  </data>
+  <data name="Settings_Tab_Exchange" xml:space="preserve">
+    <value>交易所</value>
+  </data>
+  <data name="Settings_Tab_General" xml:space="preserve">
+    <value>一般</value>
+  </data>
+  <data name="Settings_ShowChartLabel" xml:space="preserve">
+    <value>顯示折線圖</value>
+  </data>
+  <data name="Settings_ShowTemporaryInputLabel" xml:space="preserve">
+    <value>顯示臨時輸入框</value>
+  </data>
+  <data name="Settings_PriceFontSizeLabel" xml:space="preserve">
+    <value>價格文字大小</value>
+  </data>
+  <data name="Settings_SymbolFontSizeLabel" xml:space="preserve">
+    <value>幣種文字大小</value>
   </data>
 </root>

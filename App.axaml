@@ -28,11 +28,9 @@
                 <TrayIcon.Menu>
                     <NativeMenu>
                         <NativeMenuItem Header="{c:I18n 'Tooltip_ShowMainWindow'}" Click="ShowMainWindow_Click"/>
-                        <NativeMenuItemSeparator />
+                        <NativeMenuItem Header="{c:I18n 'Tooltip_Positions'}" Click="OpenPositions_Click"/>
                         <NativeMenuItem Header="{c:I18n 'Tooltip_Settings'}" Click="OpenSettings_Click"/>
-                        <NativeMenuItemSeparator />
                         <NativeMenuItem Header="{c:I18n 'Tooltip_About'}" Click="OpenAbout_Click"/>
-                        <NativeMenuItemSeparator />
                         <NativeMenuItem Header="{c:I18n 'Tooltip_Close'}" Click="Exit_Click"/>
                     </NativeMenu>
                 </TrayIcon.Menu>

@@ -115,6 +115,15 @@ namespace CryptoWidget.i18n {
         }
         
         /// <summary>
+        ///   查詢類似 Positions 的當地語系化字串。
+        /// </summary>
+        public static string ExchangePositionsTitle {
+            get {
+                return ResourceManager.GetString("ExchangePositionsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查詢類似 CryptoWidget 的當地語系化字串。
         /// </summary>
         public static string MainWindowTitle {
@@ -142,7 +151,7 @@ namespace CryptoWidget.i18n {
         }
         
         /// <summary>
-        ///   查詢類似 When clicking close button 的當地語系化字串。
+        ///   查詢類似 When clicking close 的當地語系化字串。
         /// </summary>
         public static string Settings_CloseBehaviorLabel {
             get {
@@ -156,6 +165,24 @@ namespace CryptoWidget.i18n {
         public static string Settings_CloseOption {
             get {
                 return ResourceManager.GetString("Settings_CloseOption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 Exchange API Key 的當地語系化字串。
+        /// </summary>
+        public static string Settings_ExchangeApiKeyLabel {
+            get {
+                return ResourceManager.GetString("Settings_ExchangeApiKeyLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 Exchange API Secret 的當地語系化字串。
+        /// </summary>
+        public static string Settings_ExchangeApiSecretLabel {
+            get {
+                return ResourceManager.GetString("Settings_ExchangeApiSecretLabel", resourceCulture);
             }
         }
         
@@ -205,11 +232,74 @@ namespace CryptoWidget.i18n {
         }
         
         /// <summary>
+        ///   查詢類似 Price Font Size 的當地語系化字串。
+        /// </summary>
+        public static string Settings_PriceFontSizeLabel {
+            get {
+                return ResourceManager.GetString("Settings_PriceFontSizeLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 Show Chart 的當地語系化字串。
+        /// </summary>
+        public static string Settings_ShowChartLabel {
+            get {
+                return ResourceManager.GetString("Settings_ShowChartLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 Show Temporary Input 的當地語系化字串。
+        /// </summary>
+        public static string Settings_ShowTemporaryInputLabel {
+            get {
+                return ResourceManager.GetString("Settings_ShowTemporaryInputLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 Symbol Font Size 的當地語系化字串。
+        /// </summary>
+        public static string Settings_SymbolFontSizeLabel {
+            get {
+                return ResourceManager.GetString("Settings_SymbolFontSizeLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查詢類似 Trading Pair 的當地語系化字串。
         /// </summary>
         public static string Settings_SymbolLabel {
             get {
                 return ResourceManager.GetString("Settings_SymbolLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 Appearance 的當地語系化字串。
+        /// </summary>
+        public static string Settings_Tab_Appearance {
+            get {
+                return ResourceManager.GetString("Settings_Tab_Appearance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 Exchange 的當地語系化字串。
+        /// </summary>
+        public static string Settings_Tab_Exchange {
+            get {
+                return ResourceManager.GetString("Settings_Tab_Exchange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 General 的當地語系化字串。
+        /// </summary>
+        public static string Settings_Tab_General {
+            get {
+                return ResourceManager.GetString("Settings_Tab_General", resourceCulture);
             }
         }
         
@@ -232,6 +322,42 @@ namespace CryptoWidget.i18n {
         }
         
         /// <summary>
+        ///   查詢類似 API Key is empty. 的當地語系化字串。
+        /// </summary>
+        public static string Status_ApiKeyIsEmpty {
+            get {
+                return ResourceManager.GetString("Status_ApiKeyIsEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 Error 的當地語系化字串。
+        /// </summary>
+        public static string Status_Error {
+            get {
+                return ResourceManager.GetString("Status_Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 Loading... 的當地語系化字串。
+        /// </summary>
+        public static string Status_Loading {
+            get {
+                return ResourceManager.GetString("Status_Loading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 No positions 的當地語系化字串。
+        /// </summary>
+        public static string Status_NoPositions {
+            get {
+                return ResourceManager.GetString("Status_NoPositions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查詢類似 About 的當地語系化字串。
         /// </summary>
         public static string Tooltip_About {
@@ -250,6 +376,15 @@ namespace CryptoWidget.i18n {
         }
         
         /// <summary>
+        ///   查詢類似 Positions 的當地語系化字串。
+        /// </summary>
+        public static string Tooltip_Positions {
+            get {
+                return ResourceManager.GetString("Tooltip_Positions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查詢類似 Settings 的當地語系化字串。
         /// </summary>
         public static string Tooltip_Settings {
@@ -259,7 +394,7 @@ namespace CryptoWidget.i18n {
         }
         
         /// <summary>
-        ///   查詢類似 Show Main Window 的當地語系化字串。
+        ///   查詢類似 Main Window 的當地語系化字串。
         /// </summary>
         public static string Tooltip_ShowMainWindow {
             get {

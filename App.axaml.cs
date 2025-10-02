@@ -142,6 +142,15 @@ namespace CryptoWidget
             }
         }
 
+        private void OpenPositions_Click(object? sender, EventArgs e)
+        {
+            if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+            {
+                var mainViewModel = desktop.MainWindow?.DataContext as MainViewModel;
+                mainViewModel?.OpenExchangePositionsCommand.Execute(null);
+            }
+        }
+
         private void Exit_Click(object? sender, EventArgs e)
         {
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)

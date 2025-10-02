@@ -125,7 +125,7 @@
     <comment>Keep on Top Label</comment>
   </data>
   <data name="Settings_CloseBehaviorLabel" xml:space="preserve">
-    <value>When clicking close button</value>
+    <value>When clicking close</value>
     <comment>Close Behavior Label</comment>
   </data>
   <data name="Settings_HideOption" xml:space="preserve">
@@ -139,6 +139,14 @@
   <data name="Settings_ExchangeLabel" xml:space="preserve">
     <value>Exchange</value>
     <comment>Exchange Label</comment>
+  </data>
+  <data name="Settings_ExchangeApiKeyLabel" xml:space="preserve">
+    <value>Exchange API Key</value>
+    <comment>Exchange API Key Label</comment>
+  </data>
+  <data name="Settings_ExchangeApiSecretLabel" xml:space="preserve">
+    <value>Exchange API Secret</value>
+    <comment>Exchange API Secret Label</comment>
   </data>
   <data name="Settings_AddCryptoLabel" xml:space="preserve">
     <value>Add Crypto</value>
@@ -172,6 +180,22 @@
   </data>
   <!-- Error and Information Messages -->
   <!-- Status Messages -->
+  <data name="Status_ApiKeyIsEmpty" xml:space="preserve">
+    <value>API Key is empty.</value>
+    <comment>Position Status</comment>
+  </data>
+  <data name="Status_Error" xml:space="preserve">
+    <value>Error</value>
+    <comment>Position Status</comment>
+  </data>
+  <data name="Status_Loading" xml:space="preserve">
+    <value>Loading...</value>
+    <comment>Position Status</comment>
+  </data>
+  <data name="Status_NoPositions" xml:space="preserve">
+    <value>No positions</value>
+    <comment>Position Status</comment>
+  </data>
   <!-- Tooltips -->
   <data name="Tooltip_Settings" xml:space="preserve">
     <value>Settings</value>
@@ -186,8 +210,12 @@
     <comment>Close Button Tooltip</comment>
   </data>
   <data name="Tooltip_ShowMainWindow" xml:space="preserve">
-    <value>Show Main Window</value>
-    <comment>Show Main Window Menu Item</comment>
+    <value>Main Window</value>
+    <comment>Main Window Tooltip</comment>
+  </data>
+  <data name="Tooltip_Positions" xml:space="preserve">
+    <value>Positions</value>
+    <comment>Show Positions Tooltip</comment>
   </data>
   <data name="Settings_LanguageLabel" xml:space="preserve">
     <value>Language</value>
@@ -196,5 +224,37 @@
   <data name="Description" xml:space="preserve">
     <value>Cryptocurrency Price Monitoring Widget</value>
     <comment>Description</comment>
+  </data>
+  <data name="ExchangePositionsTitle" xml:space="preserve">
+    <value>Positions</value>
+    <comment>Exchange Positions</comment>
+  </data>
+  <data name="Settings_Tab_Appearance" xml:space="preserve">
+    <value>Appearance</value>
+    <comment>Appearance Settings Tab</comment>
+  </data>
+  <data name="Settings_Tab_Exchange" xml:space="preserve">
+    <value>Exchange</value>
+    <comment>Exchange Settings Tab</comment>
+  </data>
+  <data name="Settings_Tab_General" xml:space="preserve">
+    <value>General</value>
+    <comment> Settings Tab</comment>
+  </data>
+  <data name="Settings_ShowChartLabel" xml:space="preserve">
+    <value>Show Chart</value>
+    <comment>Show Chart Label</comment>
+  </data>
+  <data name="Settings_ShowTemporaryInputLabel" xml:space="preserve">
+    <value>Show Temporary Input</value>
+    <comment>Show Temporary Input Label</comment>
+  </data>
+  <data name="Settings_PriceFontSizeLabel" xml:space="preserve">
+    <value>Price Font Size</value>
+    <comment>Price Font Size Label</comment>
+  </data>
+  <data name="Settings_SymbolFontSizeLabel" xml:space="preserve">
+    <value>Symbol Font Size</value>
+    <comment>Symbol Font Size Label</comment>
   </data>
 </root>

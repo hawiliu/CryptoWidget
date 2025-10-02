@@ -172,6 +172,18 @@
   </data>
   <!-- 错误和提示消息 -->
   <!-- 状态消息 -->
+  <data name="Status_ApiKeyIsEmpty" xml:space="preserve">
+    <value>API密钥为空。</value>
+  </data>
+  <data name="Status_Error" xml:space="preserve">
+    <value>错误</value>
+  </data>
+  <data name="Status_Loading" xml:space="preserve">
+    <value>加载中...</value>
+  </data>
+  <data name="Status_NoPositions" xml:space="preserve">
+    <value>没有仓位</value>
+  </data>
   <!-- 工具提示 -->
   <data name="Tooltip_Settings" xml:space="preserve">
     <value>设置</value>
@@ -186,8 +198,12 @@
     <comment>关闭按钮工具提示</comment>
   </data>
   <data name="Tooltip_ShowMainWindow" xml:space="preserve">
-    <value>显示主窗口</value>
-    <comment>显示主窗口菜单项目</comment>
+    <value>主窗口</value>
+    <comment>主窗口按钮工具提示</comment>
+  </data>
+  <data name="Tooltip_Positions" xml:space="preserve">
+    <value>仓位</value>
+    <comment>仓位按钮工具提示</comment>
   </data>
   <data name="Settings_LanguageLabel" xml:space="preserve">
     <value>语言</value>
@@ -195,5 +211,35 @@
   </data>
   <data name="Description" xml:space="preserve">
     <value>加密货币价格监控小工具</value>
+  </data>
+  <data name="Settings_ExchangeApiKeyLabel" xml:space="preserve">
+    <value>交易所API Key</value>
+  </data>
+  <data name="ExchangePositionsTitle" xml:space="preserve">
+    <value>仓位</value>
+  </data>
+  <data name="Settings_ExchangeApiSecretLabel" xml:space="preserve">
+    <value>交易所API Secret</value>
+  </data>
+  <data name="Settings_Tab_Appearance" xml:space="preserve">
+    <value>外观</value>
+  </data>
+  <data name="Settings_Tab_Exchange" xml:space="preserve">
+    <value>交易所</value>
+  </data>
+  <data name="Settings_Tab_General" xml:space="preserve">
+    <value>一般</value>
+  </data>
+  <data name="Settings_ShowChartLabel" xml:space="preserve">
+    <value>显示折线图</value>
+  </data>
+  <data name="Settings_ShowTemporaryInputLabel" xml:space="preserve">
+    <value>显示临时输入框</value>
+  </data>
+  <data name="Settings_PriceFontSizeLabel" xml:space="preserve">
+    <value>价格字号大小</value>
+  </data>
+  <data name="Settings_SymbolFontSizeLabel" xml:space="preserve">
+    <value>币种文字大小</value>
   </data>
 </root>
