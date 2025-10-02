@@ -2,6 +2,8 @@
 
 [English](README.md) | [繁體中文](Readme/README.zh_TW.md) | [简体中文](Readme/README.zh_CN.md)
 
+File version: v1.0.7.0
+
 A lightweight cryptocurrency price monitoring widget built with the Avalonia UI framework as a cross-platform desktop application.
 
 ![CryptoWidget](Assets/cryptowidget-logo.ico)
@@ -14,6 +16,13 @@ A lightweight cryptocurrency price monitoring widget built with the Avalonia UI 
 
 ### 📊 Real-time Price Monitoring
 - **Multiple Exchange Support**: Based on ccxt supported types
+- **Price History Line Charts**: Generate line charts from 5-second historical data to visualize price trends
+- **Temporary Recording Input Box**
+
+### 💼 Portfolio Management
+- **Exchange Positions Window**: Monitor trading positions across exchanges
+- **Real-time P&L Tracking**: View unrealized profit/loss for each position
+- **Position Monitoring**: Track both spot and futures trading positions
 
 ### 🎨 User Interface
 - **Transparent Window**: Adjustable transparency with 10%-100% transparency settings
@@ -25,6 +34,7 @@ A lightweight cryptocurrency price monitoring widget built with the Avalonia UI 
 - **Custom Cryptocurrencies**: Freely add/remove cryptocurrencies to monitor
 - **Exchange Selection**: Choose different exchanges as price sources
 - **Close Behavior**: Configure whether clicking close button hides or completely closes the application
+- **Appearance Settings**: Customize display of line charts, input boxes, and current price text size
 
 ### 🔧 Technical Features
 - **Cross-platform**: Based on Avalonia UI framework, supports Windows, macOS, Linux (untested on non-Windows systems, may have multiple issues)
@@ -58,8 +68,13 @@ A lightweight cryptocurrency price monitoring widget built with the Avalonia UI 
 - **Keep on Top**: Check to keep window on top of other applications
 - **Close Behavior**: Choose whether clicking close button hides or completely closes
 - **Exchange Selection**: Select price source exchange from dropdown menu
+- **API Configuration**: Enter your exchange API key and secret for position tracking. You need to apply for API from the exchange yourself. It is recommended to set it to read-only permissions
 - **Add Cryptocurrency**: Enter cryptocurrency code in input field (e.g., BTC or BTC/USDT), click ➕ button to add
 - **Remove Cryptocurrency**: Click ✖ button next to cryptocurrency to remove
+
+### Portfolio Management
+- **Position Monitoring**: View real-time position data with profit/loss
+- **Automatic Updates**: Positions refresh every 5 seconds
 
 ### Supported Cryptocurrency Formats
 - **Short Format**: BTC, ETH, ADA (automatically adds /USDT)
