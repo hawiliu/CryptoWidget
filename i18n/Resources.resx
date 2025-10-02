@@ -182,15 +182,19 @@
   <!-- Status Messages -->
   <data name="Status_ApiKeyIsEmpty" xml:space="preserve">
     <value>API Key is empty.</value>
+    <comment>Position Status</comment>
   </data>
   <data name="Status_Error" xml:space="preserve">
     <value>Error</value>
+    <comment>Position Status</comment>
   </data>
   <data name="Status_Loading" xml:space="preserve">
     <value>Loading...</value>
+    <comment>Position Status</comment>
   </data>
   <data name="Status_NoPositions" xml:space="preserve">
     <value>No positions</value>
+    <comment>Position Status</comment>
   </data>
   <!-- Tooltips -->
   <data name="Tooltip_Settings" xml:space="preserve">
@@ -227,12 +231,15 @@
   </data>
   <data name="Settings_Tab_Appearance" xml:space="preserve">
     <value>Appearance</value>
+    <comment>Appearance Settings Tab</comment>
   </data>
   <data name="Settings_Tab_Exchange" xml:space="preserve">
     <value>Exchange</value>
+    <comment>Exchange Settings Tab</comment>
   </data>
   <data name="Settings_Tab_General" xml:space="preserve">
     <value>General</value>
+    <comment> Settings Tab</comment>
   </data>
   <data name="Settings_ShowChartLabel" xml:space="preserve">
     <value>Show Chart</value>
@@ -244,8 +251,10 @@
   </data>
   <data name="Settings_PriceFontSizeLabel" xml:space="preserve">
     <value>Price Font Size</value>
+    <comment>Price Font Size Label</comment>
   </data>
   <data name="Settings_SymbolFontSizeLabel" xml:space="preserve">
     <value>Symbol Font Size</value>
+    <comment>Symbol Font Size Label</comment>
   </data>
 </root>

@@ -10,8 +10,8 @@
 
 namespace CryptoWidget.i18n {
     using System;
-
-
+    
+    
     /// <summary>
     ///   用於查詢當地語系化字串等的強類型資源類別。
     /// </summary>
@@ -22,399 +22,383 @@ namespace CryptoWidget.i18n {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class Resources
-    {
-
+    public class Resources {
+        
         private static global::System.Resources.ResourceManager resourceMan;
-
+        
         private static global::System.Globalization.CultureInfo resourceCulture;
-
+        
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Resources()
-        {
+        internal Resources() {
         }
-
+        
         /// <summary>
         ///   傳回這個類別使用的快取的 ResourceManager 執行個體。
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Resources.ResourceManager ResourceManager
-        {
-            get
-            {
-                if (object.ReferenceEquals(resourceMan, null))
-                {
+        public static global::System.Resources.ResourceManager ResourceManager {
+            get {
+                if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("CryptoWidget.i18n.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
             }
         }
-
+        
         /// <summary>
         ///   覆寫目前執行緒的 CurrentUICulture 屬性，對象是所有
         ///   使用這個強類型資源類別的資源查閱。
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Globalization.CultureInfo Culture
-        {
-            get
-            {
+        public static global::System.Globalization.CultureInfo Culture {
+            get {
                 return resourceCulture;
             }
-            set
-            {
+            set {
                 resourceCulture = value;
             }
         }
-
+        
         /// <summary>
         ///   查詢類似 About 的當地語系化字串。
         /// </summary>
-        public static string AboutWindowTitle
-        {
-            get
-            {
+        public static string AboutWindowTitle {
+            get {
                 return ResourceManager.GetString("AboutWindowTitle", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   查詢類似 CryptoWidget 的當地語系化字串。
         /// </summary>
-        public static string AppTitle
-        {
-            get
-            {
+        public static string AppTitle {
+            get {
                 return ResourceManager.GetString("AppTitle", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   查詢類似 Cancel 的當地語系化字串。
         /// </summary>
-        public static string Btn_Cancel
-        {
-            get
-            {
+        public static string Btn_Cancel {
+            get {
                 return ResourceManager.GetString("Btn_Cancel", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   查詢類似 OK 的當地語系化字串。
         /// </summary>
-        public static string Btn_OK
-        {
-            get
-            {
+        public static string Btn_OK {
+            get {
                 return ResourceManager.GetString("Btn_OK", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   查詢類似 Save 的當地語系化字串。
         /// </summary>
-        public static string Btn_Save
-        {
-            get
-            {
+        public static string Btn_Save {
+            get {
                 return ResourceManager.GetString("Btn_Save", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   查詢類似 Cryptocurrency Price Monitoring Widget 的當地語系化字串。
         /// </summary>
-        public static string Description
-        {
-            get
-            {
+        public static string Description {
+            get {
                 return ResourceManager.GetString("Description", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   查詢類似 Positions 的當地語系化字串。
         /// </summary>
-        public static string ExchangePositionsTitle
-        {
-            get
-            {
+        public static string ExchangePositionsTitle {
+            get {
                 return ResourceManager.GetString("ExchangePositionsTitle", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   查詢類似 CryptoWidget 的當地語系化字串。
         /// </summary>
-        public static string MainWindowTitle
-        {
-            get
-            {
+        public static string MainWindowTitle {
+            get {
                 return ResourceManager.GetString("MainWindowTitle", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   查詢類似 Add Crypto 的當地語系化字串。
         /// </summary>
-        public static string Settings_AddCryptoLabel
-        {
-            get
-            {
+        public static string Settings_AddCryptoLabel {
+            get {
                 return ResourceManager.GetString("Settings_AddCryptoLabel", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   查詢類似 e.g. BTC or BTC/USDT or BTC:USDT 的當地語系化字串。
         /// </summary>
-        public static string Settings_AddCryptoWatermark
-        {
-            get
-            {
+        public static string Settings_AddCryptoWatermark {
+            get {
                 return ResourceManager.GetString("Settings_AddCryptoWatermark", resourceCulture);
             }
         }
-
+        
         /// <summary>
-        ///   查詢類似 When clicking close button 的當地語系化字串。
+        ///   查詢類似 When clicking close 的當地語系化字串。
         /// </summary>
-        public static string Settings_CloseBehaviorLabel
-        {
-            get
-            {
+        public static string Settings_CloseBehaviorLabel {
+            get {
                 return ResourceManager.GetString("Settings_CloseBehaviorLabel", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   查詢類似 Close 的當地語系化字串。
         /// </summary>
-        public static string Settings_CloseOption
-        {
-            get
-            {
+        public static string Settings_CloseOption {
+            get {
                 return ResourceManager.GetString("Settings_CloseOption", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   查詢類似 Exchange API Key 的當地語系化字串。
         /// </summary>
-        public static string Settings_ExchangeApiKeyLabel
-        {
-            get
-            {
+        public static string Settings_ExchangeApiKeyLabel {
+            get {
                 return ResourceManager.GetString("Settings_ExchangeApiKeyLabel", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   查詢類似 Exchange API Secret 的當地語系化字串。
         /// </summary>
-        public static string Settings_ExchangeApiSecretLabel
-        {
-            get
-            {
+        public static string Settings_ExchangeApiSecretLabel {
+            get {
                 return ResourceManager.GetString("Settings_ExchangeApiSecretLabel", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   查詢類似 Exchange 的當地語系化字串。
         /// </summary>
-        public static string Settings_ExchangeLabel
-        {
-            get
-            {
+        public static string Settings_ExchangeLabel {
+            get {
                 return ResourceManager.GetString("Settings_ExchangeLabel", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   查詢類似 Hide 的當地語系化字串。
         /// </summary>
-        public static string Settings_HideOption
-        {
-            get
-            {
+        public static string Settings_HideOption {
+            get {
                 return ResourceManager.GetString("Settings_HideOption", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   查詢類似 Keep on Top 的當地語系化字串。
         /// </summary>
-        public static string Settings_KeepOnTopLabel
-        {
-            get
-            {
+        public static string Settings_KeepOnTopLabel {
+            get {
                 return ResourceManager.GetString("Settings_KeepOnTopLabel", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   查詢類似 Language 的當地語系化字串。
         /// </summary>
-        public static string Settings_LanguageLabel
-        {
-            get
-            {
+        public static string Settings_LanguageLabel {
+            get {
                 return ResourceManager.GetString("Settings_LanguageLabel", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   查詢類似 Window Opacity 的當地語系化字串。
         /// </summary>
-        public static string Settings_OpacityLabel
-        {
-            get
-            {
+        public static string Settings_OpacityLabel {
+            get {
                 return ResourceManager.GetString("Settings_OpacityLabel", resourceCulture);
             }
         }
-
+        
+        /// <summary>
+        ///   查詢類似 Price Font Size 的當地語系化字串。
+        /// </summary>
+        public static string Settings_PriceFontSizeLabel {
+            get {
+                return ResourceManager.GetString("Settings_PriceFontSizeLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 Show Chart 的當地語系化字串。
+        /// </summary>
+        public static string Settings_ShowChartLabel {
+            get {
+                return ResourceManager.GetString("Settings_ShowChartLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 Show Temporary Input 的當地語系化字串。
+        /// </summary>
+        public static string Settings_ShowTemporaryInputLabel {
+            get {
+                return ResourceManager.GetString("Settings_ShowTemporaryInputLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 Symbol Font Size 的當地語系化字串。
+        /// </summary>
+        public static string Settings_SymbolFontSizeLabel {
+            get {
+                return ResourceManager.GetString("Settings_SymbolFontSizeLabel", resourceCulture);
+            }
+        }
+        
         /// <summary>
         ///   查詢類似 Trading Pair 的當地語系化字串。
         /// </summary>
-        public static string Settings_SymbolLabel
-        {
-            get
-            {
+        public static string Settings_SymbolLabel {
+            get {
                 return ResourceManager.GetString("Settings_SymbolLabel", resourceCulture);
             }
         }
-
+        
         /// <summary>
-        ///   查詢類似 Settings 的當地語系化字串。
+        ///   查詢類似 Appearance 的當地語系化字串。
         /// </summary>
-        public static string SettingsTitle
-        {
-            get
-            {
-                return ResourceManager.GetString("SettingsTitle", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   查詢類似 Settings 的當地語系化字串。
-        /// </summary>
-        public static string SettingsWindowTitle
-        {
-            get
-            {
-                return ResourceManager.GetString("SettingsWindowTitle", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   查詢類似 About 的當地語系化字串。
-        /// </summary>
-        public static string Tooltip_About
-        {
-            get
-            {
-                return ResourceManager.GetString("Tooltip_About", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   查詢類似 Close 的當地語系化字串。
-        /// </summary>
-        public static string Tooltip_Close
-        {
-            get
-            {
-                return ResourceManager.GetString("Tooltip_Close", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   查詢類似 Settings 的當地語系化字串。
-        /// </summary>
-        public static string Tooltip_Settings
-        {
-            get
-            {
-                return ResourceManager.GetString("Tooltip_Settings", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   查詢類似 Show Main Window 的當地語系化字串。
-        /// </summary>
-        public static string Tooltip_ShowMainWindow
-        {
-            get
-            {
-                return ResourceManager.GetString("Tooltip_ShowMainWindow", resourceCulture);
-            }
-        }
-
-        public static string Status_Loading
-        {
-            get
-            {
-                return ResourceManager.GetString("Status_Loading", resourceCulture);
-            }
-        }
-
-        public static string Status_ApiKeyIsEmpty
-        {
-            get
-            {
-                return ResourceManager.GetString("Status_ApiKeyIsEmpty", resourceCulture);
-            }
-        }
-
-        public static string Status_NoPositions
-        {
-            get
-            {
-                return ResourceManager.GetString("Status_NoPositions", resourceCulture);
-            }
-        }
-
-        public static string Status_Error
-        {
-            get
-            {
-                return ResourceManager.GetString("Status_Error", resourceCulture);
-            }
-        }
-
-        public static string Settings_Tab_Appearance
-        {
-            get
-            {
+        public static string Settings_Tab_Appearance {
+            get {
                 return ResourceManager.GetString("Settings_Tab_Appearance", resourceCulture);
             }
         }
-
-        public static string Settings_Tab_Exchange
-        {
-            get
-            {
+        
+        /// <summary>
+        ///   查詢類似 Exchange 的當地語系化字串。
+        /// </summary>
+        public static string Settings_Tab_Exchange {
+            get {
                 return ResourceManager.GetString("Settings_Tab_Exchange", resourceCulture);
             }
         }
-
-        public static string Settings_Tab_General
-        {
-            get
-            {
+        
+        /// <summary>
+        ///   查詢類似 General 的當地語系化字串。
+        /// </summary>
+        public static string Settings_Tab_General {
+            get {
                 return ResourceManager.GetString("Settings_Tab_General", resourceCulture);
             }
         }
-
-        public static string Settings_ShowChartLabel
-        {
-            get
-            {
-                return ResourceManager.GetString("Settings_ShowChartLabel", resourceCulture);
+        
+        /// <summary>
+        ///   查詢類似 Settings 的當地語系化字串。
+        /// </summary>
+        public static string SettingsTitle {
+            get {
+                return ResourceManager.GetString("SettingsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 Settings 的當地語系化字串。
+        /// </summary>
+        public static string SettingsWindowTitle {
+            get {
+                return ResourceManager.GetString("SettingsWindowTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 API Key is empty. 的當地語系化字串。
+        /// </summary>
+        public static string Status_ApiKeyIsEmpty {
+            get {
+                return ResourceManager.GetString("Status_ApiKeyIsEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 Error 的當地語系化字串。
+        /// </summary>
+        public static string Status_Error {
+            get {
+                return ResourceManager.GetString("Status_Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 Loading... 的當地語系化字串。
+        /// </summary>
+        public static string Status_Loading {
+            get {
+                return ResourceManager.GetString("Status_Loading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 No positions 的當地語系化字串。
+        /// </summary>
+        public static string Status_NoPositions {
+            get {
+                return ResourceManager.GetString("Status_NoPositions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 About 的當地語系化字串。
+        /// </summary>
+        public static string Tooltip_About {
+            get {
+                return ResourceManager.GetString("Tooltip_About", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 Close 的當地語系化字串。
+        /// </summary>
+        public static string Tooltip_Close {
+            get {
+                return ResourceManager.GetString("Tooltip_Close", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 Positions 的當地語系化字串。
+        /// </summary>
+        public static string Tooltip_Positions {
+            get {
+                return ResourceManager.GetString("Tooltip_Positions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 Settings 的當地語系化字串。
+        /// </summary>
+        public static string Tooltip_Settings {
+            get {
+                return ResourceManager.GetString("Tooltip_Settings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 Main Window 的當地語系化字串。
+        /// </summary>
+        public static string Tooltip_ShowMainWindow {
+            get {
+                return ResourceManager.GetString("Tooltip_ShowMainWindow", resourceCulture);
             }
         }
     }
