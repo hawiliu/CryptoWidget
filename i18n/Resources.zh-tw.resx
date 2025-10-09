@@ -242,4 +242,17 @@
   <data name="Settings_SymbolFontSizeLabel" xml:space="preserve">
     <value>幣種文字大小</value>
   </data>
+  <!-- K線視窗相關 -->
+  <data name="KLineWindowTitle" xml:space="preserve">
+    <value>K線圖</value>
+    <comment>K線視窗標題</comment>
+  </data>
+  <data name="KLineTitle" xml:space="preserve">
+    <value>K線圖</value>
+    <comment>K線標題</comment>
+  </data>
+  <data name="Query" xml:space="preserve">
+    <value>查詢</value>
+    <comment>查詢按鈕</comment>
+  </data>
 </root>

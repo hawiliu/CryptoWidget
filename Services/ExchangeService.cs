@@ -2,6 +2,7 @@ using ccxt;
 using CryptoWidget.Services.Dto;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace CryptoWidget.Services
@@ -179,6 +180,81 @@ namespace CryptoWidget.Services
             }
 
             return result;
+        }
+
+        public static async Task<List<KLineData>> GetKLineDataAsync(string symbol, string timeframe, int limit, string exchangeName = "binance")
+        {
+            var result = new List<KLineData>();
+
+            try
+            {
+                var exchange = EnsureExchange(exchangeName);
+                
+                // 轉換時區格式
+                string ccxtTimeframe = ConvertTimeframe(timeframe);
+                
+                // 轉換交易對格式
+                bool isContractFormat = symbol.Contains(":USDT");
+                string ccxtSymbol = ConvertSymbol(symbol, isContractFormat);
+                
+                // 設定交易所類型
+                exchange.options["defaultType"] = isContractFormat ? "future" : "spot";
+                
+                // 獲取K線資料
+                var ohlcv = await exchange.FetchOHLCV(ccxtSymbol, ccxtTimeframe, null, limit);
+                
+                foreach (OHLCV candle in ohlcv)
+                {
+                    try
+                    {
+                        // 使用動態類型存取
+                        result.Add(new KLineData
+                        {
+                            Timestamp = DateTimeOffset.FromUnixTimeMilliseconds(candle.timestamp ?? 0).DateTime,
+                            Open = (decimal)(candle.open ?? 0),
+                            High = (decimal)(candle.high ?? 0),
+                            Low = (decimal)(candle.low ?? 0),
+                            Close = (decimal)(candle.close ?? 0),
+                            Volume = (decimal)(candle.volume ?? 0)
+                        });
+                    }
+                    catch
+                    {
+                        // 跳過無效的K線資料
+                        continue;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                // 發生錯誤時回傳空集合
+            }
+
+            return result;
+        }
+
+        private static string ConvertTimeframe(string timeframe)
+        {
+            // 將常見的時區格式轉換為CCXT格式
+            return timeframe switch
+            {
+                "1m" => "1m",
+                "3m" => "3m",
+                "5m" => "5m",
+                "15m" => "15m",
+                "30m" => "30m",
+                "1h" => "1h",
+                "2h" => "2h",
+                "4h" => "4h",
+                "6h" => "6h",
+                "8h" => "8h",
+                "12h" => "12h",
+                "1d" => "1d",
+                "3d" => "3d",
+                "1w" => "1w",
+                "1M" => "1M",
+                _ => "1h" // 預設1小時
+            };
         }
     }
 }

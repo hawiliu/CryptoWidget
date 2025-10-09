@@ -22,6 +22,8 @@ namespace CryptoWidget.ViewModels
 
         public ExchangePositionsWindow? _exchangePositionsWindow;
 
+        public KLineWindow? _kLineWindow;
+
         public MainViewModel(SettingViewModel settingViewModel)
         {
             _settingViewModel = settingViewModel;
@@ -178,6 +180,39 @@ namespace CryptoWidget.ViewModels
             else
             {
                 _exchangePositionsWindow.Activate();
+            }
+        }
+
+        [RelayCommand]
+        private void OpenKLine()
+        {
+            if (_kLineWindow is null || !_kLineWindow.IsVisible)
+            {
+                var mainWindow = (Application.Current?.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime)?.MainWindow;
+
+                _kLineWindow = new KLineWindow(new KLineViewModel(_settingViewModel));
+
+                if (mainWindow is not null && mainWindow.IsVisible)
+                {
+                    _kLineWindow.WindowStartupLocation = WindowStartupLocation.Manual;
+
+                    var rightX = mainWindow.Position.X + (int)mainWindow.Bounds.Width;
+                    var sameY = mainWindow.Position.Y;
+                    _kLineWindow.Position = new PixelPoint(rightX, sameY);
+
+                    _kLineWindow.Closed += (_, __) => _kLineWindow = null;
+                    _kLineWindow.Show(mainWindow);
+                }
+                else
+                {
+                    _kLineWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                    _kLineWindow.Closed += (_, __) => _kLineWindow = null;
+                    _kLineWindow.Show();
+                }
+            }
+            else
+            {
+                _kLineWindow.Activate();
             }
         }
     }

@@ -42,7 +42,7 @@
         <Button Grid.Row="0"
           HorizontalAlignment="Right"
           VerticalAlignment="Center"
-          Margin="0,0,72,0"
+          Margin="0,0,96,0"
           Width="24" Height="24"
           Padding="0"
           Background="Transparent" BorderThickness="0"
@@ -52,6 +52,21 @@
           VerticalContentAlignment="Center"
           Content="&#xE946;"
           Command="{Binding OpenAboutCommand}"/>
+
+        <!-- K棒查詢按鈕 -->
+        <Button Grid.Row="0"
+          HorizontalAlignment="Right"
+          VerticalAlignment="Center"
+          Margin="0,0,72,0"
+          Width="24" Height="24"
+          Padding="0"
+          Background="Transparent" BorderThickness="0"
+          FontFamily="Segoe MDL2 Assets"
+          FontSize="14"
+          HorizontalContentAlignment="Center"
+          VerticalContentAlignment="Center"
+          Content="&#xE721;"
+          Command="{Binding OpenKLineCommand}"/>
 
         <!-- 齒輪按鈕 -->
         <Button Grid.Row="0"

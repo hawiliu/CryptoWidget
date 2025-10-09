@@ -9,6 +9,8 @@ set PUBLISH_DIR="bin\Release\publish"
 if exist %PUBLISH_DIR% rmdir /s /q %PUBLISH_DIR%
 mkdir %PUBLISH_DIR%
 
+dotnet clean CryptoWidget.csproj --configuration Release
+
 echo Publishing Windows x64 version...
 dotnet publish CryptoWidget.csproj --configuration Release --output "%PUBLISH_DIR%\CryptoWidget_win-x64" --self-contained true --runtime win-x64 --property:PublishSingleFile=true
 
