@@ -26,6 +26,8 @@ namespace CryptoWidget.Services.Dto
 
         public string SelectedLanguage { get; set; } = "en";
 
+        public string SelectedTimeframe { get; set; } = "15m";
+
         public List<string> CryptoList { get; set; } = new List<string>();
     }
 }

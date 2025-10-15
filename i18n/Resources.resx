@@ -242,8 +242,12 @@
     <comment> Settings Tab</comment>
   </data>
   <data name="Settings_ShowChartLabel" xml:space="preserve">
-    <value>Show Chart</value>
-    <comment>Show Chart Label</comment>
+    <value>Show Mini K-Line Chart</value>
+    <comment>Show Mini K-Line Chart Label</comment>
+  </data>
+  <data name="Settings_TimeframeLabel" xml:space="preserve">
+    <value>Timeframe</value>
+    <comment>Timeframe Label</comment>
   </data>
   <data name="Settings_ShowTemporaryInputLabel" xml:space="preserve">
     <value>Show Temporary Input</value>

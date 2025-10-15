@@ -27,7 +27,6 @@
         SystemDecorations="None"
         >
   <Window.Resources>
-    <local:HistoryToPointsConverter x:Key="HistoryToPointsConverter"/>
     <local:BoolToGridLengthConverter x:Key="BoolToGridLengthConverter"/>
   </Window.Resources>
   
@@ -120,7 +119,7 @@
                       Margin="0,0,10,0">
             <StackPanel Spacing="10" Margin="0,0,0,0">
               <!-- 當有資料時顯示 ItemsControl -->
-              <ItemsControl ItemsSource="{Binding PriceItems}" 
+              <ItemsControl Name="PriceItemsControl" ItemsSource="{Binding PriceItems}" 
                             IsVisible="{Binding HasData}">
                 <ItemsControl.ItemTemplate>
                   <DataTemplate>
@@ -137,20 +136,16 @@
                         <TextBlock Text="{Binding Price}" Foreground="LightGray" FontSize="{Binding $parent[ItemsControl].DataContext.Settings.PriceFontSize}"/>
                       </StackPanel>
 
-                      <!-- 右：迷你折線圖（隨容器縮放） -->
-                      <Border Grid.Column="1" Background="#202020" CornerRadius="6" Padding="6" Height="30" Margin="5,0,5,0" IsVisible="{Binding $parent[ItemsControl].DataContext.Settings.ShowChart}">
-                        <!-- 用 Viewbox 讓內部 100x26 的座標自動等比放大 -->
-                        <Viewbox Stretch="Fill">
-                          <Grid Width="100" Height="26">
-                            <!-- X 軸淡線（可選） -->
-                            <Rectangle Height="1" VerticalAlignment="Center" Fill="#404040"/>
-                            <!-- 折線 -->
-                            <Polyline
-                              Points="{Binding History, Converter={StaticResource HistoryToPointsConverter}}"
-                              Stroke="#66FFFFFF" StrokeThickness="2" />
-                          </Grid>
-                        </Viewbox>
-                      </Border>
+                       <!-- 右：迷你K棒圖（隨容器縮放） -->
+                       <Border Grid.Column="1" Background="#202020" CornerRadius="6" Padding="6" Height="30" Margin="5,0,5,0" IsVisible="{Binding $parent[ItemsControl].DataContext.Settings.ShowChart}">
+                         <!-- 用 Viewbox 讓內部 100x26 的座標自動等比放大 -->
+                         <Viewbox Stretch="Fill">
+                           <Canvas Name="MiniKLineCanvas" Width="100" Height="26" Background="Transparent">
+                             <!-- X 軸淡線（可選） -->
+                             <Rectangle Name="XAxisLine" Height="1" VerticalAlignment="Center" Fill="#404040"/>
+                           </Canvas>
+                         </Viewbox>
+                       </Border>
                       
                       <!-- 輸入框 -->
                       <TextBox Grid.Column="2" 

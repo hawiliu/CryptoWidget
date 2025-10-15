@@ -250,6 +250,15 @@ namespace CryptoWidget.i18n {
         }
         
         /// <summary>
+        ///   查詢類似 Timeframe 的當地語系化字串。
+        /// </summary>
+        public static string Settings_TimeframeLabel {
+            get {
+                return ResourceManager.GetString("Settings_TimeframeLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查詢類似 Show Temporary Input 的當地語系化字串。
         /// </summary>
         public static string Settings_ShowTemporaryInputLabel {

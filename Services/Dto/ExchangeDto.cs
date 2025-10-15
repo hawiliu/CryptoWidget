@@ -8,19 +8,18 @@ namespace CryptoWidget.Services.Dto
     {
         public PriceItem()
         {
-            History.CollectionChanged += History_CollectionChanged;
+            KLineData.CollectionChanged += KLineData_CollectionChanged;
         }
 
-        partial void OnHistoryChanged(ObservableCollection<double> oldValue, ObservableCollection<double> newValue)
+        partial void OnKLineDataChanged(ObservableCollection<KLineData> oldValue, ObservableCollection<KLineData> newValue)
         {
-            if (oldValue != null) oldValue.CollectionChanged -= History_CollectionChanged;
-            if (newValue != null) newValue.CollectionChanged += History_CollectionChanged;
-            OnPropertyChanged(nameof(History));
+            if (oldValue != null) oldValue.CollectionChanged -= KLineData_CollectionChanged;
+            if (newValue != null) newValue.CollectionChanged += KLineData_CollectionChanged;
+            OnPropertyChanged(nameof(KLineData));
         }
 
-        private void History_CollectionChanged(object? s, NotifyCollectionChangedEventArgs e)
-            => OnPropertyChanged(nameof(History));
-
+        private void KLineData_CollectionChanged(object? s, NotifyCollectionChangedEventArgs e)
+            => OnPropertyChanged(nameof(KLineData));
 
         [ObservableProperty]
         private string symbol = string.Empty;
@@ -32,13 +31,27 @@ namespace CryptoWidget.Services.Dto
         private string inputValue = string.Empty;
 
         [ObservableProperty]
-        private ObservableCollection<double> history = new ObservableCollection<double>();
+        private ObservableCollection<KLineData> kLineData = new ObservableCollection<KLineData>();
 
-        public void Push(double newPrice, int maxPoints = 100)
+        public void UpdateKLineData(ObservableCollection<KLineData> newKLineData)
         {
-            History.Add(newPrice);
-            while (History.Count > maxPoints)
-                History.RemoveAt(0);
+            // 先清除舊的事件監聽器
+            if (KLineData != null)
+            {
+                KLineData.CollectionChanged -= KLineData_CollectionChanged;
+            }
+            
+            // 設置新的KLineData
+            KLineData = newKLineData;
+            
+            // 添加新的事件監聽器
+            if (KLineData != null)
+            {
+                KLineData.CollectionChanged += KLineData_CollectionChanged;
+            }
+            
+            // 觸發屬性變更通知
+            OnPropertyChanged(nameof(KLineData));
         }
     }
 

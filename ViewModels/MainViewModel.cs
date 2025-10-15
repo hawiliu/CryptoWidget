@@ -5,6 +5,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using System.Collections.ObjectModel;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Timers;
@@ -49,36 +50,68 @@ namespace CryptoWidget.ViewModels
         {
             try
             {
-                var prices = await ExchangeService.GetCryptoPricesAsync(Settings.CryptoList.ToList(), Settings.SelectedExchange);
-
                 // 建立現有項目的字典，以 Symbol 為鍵
                 var existingItems = PriceItems.ToDictionary(item => item.Symbol, item => item);
+                var currentSymbols = new HashSet<string>();
 
-                // 處理每個價格項目
-                foreach (var price in prices)
+                // 處理每個交易對
+                foreach (var symbol in Settings.CryptoList)
                 {
-                    if (existingItems.TryGetValue(price.Key, out var existingItem))
+                    try
                     {
-                        // 存在：更新價格
-                        existingItem.Price = price.Value.HasValue ? price.Value.Value.ToString() : "Error";
-                        existingItem.Push((double)(price.Value.HasValue ? price.Value.Value : 0));
-                    }
-                    else
-                    {
-                        // 不存在：新增項目
-                        var newItem = new PriceItem
+                        // 獲取K棒資料（10根K棒）
+                        var kLineData = await ExchangeService.GetKLineDataAsync(symbol, Settings.SelectedTimeframe, 10, Settings.SelectedExchange);
+                        
+                        if (kLineData != null && kLineData.Any())
                         {
-                            Symbol = price.Key,
-                            Price = price.Value.HasValue ? price.Value.Value.ToString() : "Error",
-                            InputValue = ""
-                        };
-                        newItem.Push((double)(price.Value.HasValue ? price.Value.Value : 0));
-                        PriceItems.Add(newItem);
+                            // 從最新K棒獲取當前價格（Close價格）
+                            var latestKLine = kLineData.Last();
+                            var currentPrice = latestKLine.Close.ToString();
+
+                            if (existingItems.TryGetValue(symbol, out var existingItem))
+                            {
+                                // 存在：更新價格和K棒資料
+                                existingItem.Price = currentPrice;
+                                existingItem.UpdateKLineData(new ObservableCollection<KLineData>(kLineData));
+                            }
+                            else
+                            {
+                                // 不存在：新增項目
+                                var newItem = new PriceItem
+                                {
+                                    Symbol = symbol,
+                                    Price = currentPrice,
+                                    InputValue = ""
+                                };
+                                newItem.UpdateKLineData(new ObservableCollection<KLineData>(kLineData));
+                                PriceItems.Add(newItem);
+                            }
+                            
+                            currentSymbols.Add(symbol);
+                        }
+                    }
+                    catch
+                    {
+                        // 單個交易對獲取失敗時，標記為錯誤但繼續處理其他交易對
+                        if (existingItems.TryGetValue(symbol, out var existingItem))
+                        {
+                            existingItem.Price = "Error";
+                        }
+                        else
+                        {
+                            var newItem = new PriceItem
+                            {
+                                Symbol = symbol,
+                                Price = "Error",
+                                InputValue = ""
+                            };
+                            PriceItems.Add(newItem);
+                        }
+                        currentSymbols.Add(symbol);
                     }
                 }
 
                 // 移除不再存在的項目
-                var currentSymbols = prices.Keys.ToHashSet();
                 var itemsToRemove = PriceItems.Where(item => !currentSymbols.Contains(item.Symbol)).ToList();
                 foreach (var item in itemsToRemove)
                 {
@@ -113,6 +146,7 @@ namespace CryptoWidget.ViewModels
                 StatusStr = "Error";
             }
         }
+
 
         [RelayCommand]
         private void OpenSettings()

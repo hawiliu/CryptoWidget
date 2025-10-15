@@ -231,7 +231,10 @@
     <value>一般</value>
   </data>
   <data name="Settings_ShowChartLabel" xml:space="preserve">
-    <value>顯示折線圖</value>
+    <value>顯示迷你K線圖</value>
+  </data>
+  <data name="Settings_TimeframeLabel" xml:space="preserve">
+    <value>時區</value>
   </data>
   <data name="Settings_ShowTemporaryInputLabel" xml:space="preserve">
     <value>顯示臨時輸入框</value>

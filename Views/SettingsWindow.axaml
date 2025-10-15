@@ -223,7 +223,7 @@
                       Value="{Binding OpacityLevel}"
                       TickFrequency="0.1"/>
 
-              <!-- 顯示折線圖 -->
+              <!-- 顯示迷你K線圖 -->
               <Grid>
                 <Grid.ColumnDefinitions>
                   <ColumnDefinition Width="*"/>
@@ -231,6 +231,44 @@
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0" Text="{c:I18n 'Settings_ShowChartLabel'}" Foreground="White" FontSize="14" FontWeight="Bold" VerticalAlignment="Center"/>
                 <CheckBox Grid.Column="1" IsChecked="{Binding ShowChart}" VerticalAlignment="Center" />
+              </Grid>
+
+              <!-- 時區選擇 -->
+              <Grid>
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition Width="*"/>
+                  <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Text="{c:I18n 'Settings_TimeframeLabel'}" Foreground="White" FontSize="14" FontWeight="Bold" VerticalAlignment="Center"/>
+                <ComboBox Grid.Column="1" 
+                          x:Name="TimeframeComboBox"
+                          SelectedItem="{Binding SelectedTimeframe}"
+                          ItemsSource="{Binding Timeframes}"
+                          Background="#404040"
+                          Foreground="White"
+                          BorderBrush="Gray"
+                          BorderThickness="1"
+                          Width="160"
+                          FontSize="12"
+                          VerticalContentAlignment="Center"
+                          HorizontalContentAlignment="Center"
+                          IsDropDownOpen="False">
+                  <ComboBox.Styles>
+                    <Style Selector="ComboBoxItem">
+                      <Setter Property="Background" Value="#404040"/>
+                      <Setter Property="Foreground" Value="White"/>
+                      <Setter Property="Padding" Value="8,4"/>
+                    </Style>
+                    <Style Selector="ComboBoxItem:selected">
+                      <Setter Property="Background" Value="#606060"/>
+                      <Setter Property="Foreground" Value="White"/>
+                    </Style>
+                    <Style Selector="ComboBoxItem:pointerover">
+                      <Setter Property="Background" Value="#505050"/>
+                      <Setter Property="Foreground" Value="White"/>
+                    </Style>
+                  </ComboBox.Styles>
+                </ComboBox>
               </Grid>
 
               <!-- 顯示備註輸入框 -->
