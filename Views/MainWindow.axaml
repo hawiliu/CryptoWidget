@@ -131,10 +131,26 @@
                       </Grid.ColumnDefinitions>
                       
                       <!-- 交易對和價格 -->
-                      <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
-                        <TextBlock Text="{Binding Symbol}" Foreground="White" FontSize="{Binding $parent[ItemsControl].DataContext.Settings.SymbolFontSize}" FontWeight="Bold" Margin="0,0,8,0"/>
-                        <TextBlock Text="{Binding Price}" Foreground="LightGray" FontSize="{Binding $parent[ItemsControl].DataContext.Settings.PriceFontSize}"/>
-                      </StackPanel>
+                      <Grid Grid.Column="0" VerticalAlignment="Center">
+                        <Grid.ColumnDefinitions>
+                          <ColumnDefinition Width="*"/>
+                          <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        
+                        <TextBlock Grid.Column="0" 
+                                   Text="{Binding Symbol}" 
+                                   Foreground="White" 
+                                   FontSize="{Binding $parent[ItemsControl].DataContext.Settings.SymbolFontSize}" 
+                                   FontWeight="Bold" 
+                                   Margin="0,0,8,0"
+                                   TextTrimming="CharacterEllipsis"
+                                   ToolTip.Tip="{Binding Symbol}"/>
+                                   
+                        <TextBlock Grid.Column="1" 
+                                   Text="{Binding Price}" 
+                                   Foreground="LightGray" 
+                                   FontSize="{Binding $parent[ItemsControl].DataContext.Settings.PriceFontSize}"/>
+                      </Grid>
 
                        <!-- 右：迷你K棒圖（隨容器縮放） -->
                        <Border Grid.Column="1" Background="#202020" CornerRadius="6" Padding="6" Height="30" Margin="5,0,5,0" IsVisible="{Binding $parent[ItemsControl].DataContext.Settings.ShowChart}">
