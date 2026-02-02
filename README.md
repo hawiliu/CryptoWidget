@@ -2,7 +2,7 @@
 
 [English](README.md) | [繁體中文](Readme/README.zh_TW.md) | [简体中文](Readme/README.zh_CN.md)
 
-File version: v1.0.7.0
+File version: v1.0.8.0
 
 A lightweight cryptocurrency price monitoring widget built with the Avalonia UI framework as a cross-platform desktop application.
 
@@ -16,7 +16,7 @@ A lightweight cryptocurrency price monitoring widget built with the Avalonia UI 
 
 ### 📊 Real-time Price Monitoring
 - **Multiple Exchange Support**: Based on ccxt supported types
-- **Price History Line Charts**: Generate line charts from 5-second historical data to visualize price trends
+- **Price History Line Charts**: Generate Mini K-Line charts to visualize price trends
 - **Temporary Recording Input Box**
 
 ### 💼 Portfolio Management
